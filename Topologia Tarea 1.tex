@@ -1,0 +1,100 @@
+\documentclass[letter,twoside,12pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{fullpage}
+\usepackage[spanish]{babel}
+\usepackage{latexsym}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\title{Topolog\'ia I: Tarea \#1}
+\newtheorem{lemma}{Lema}
+\author{Jonathan Andr\'es Ni\~no Cort\'es}
+\begin{document}
+\maketitle
+Para cada $a \in \mathbb{Z}^+$ y $b \in \mathbb{Z}$ definimos el conjunto $S(a,b) :=\{an+b:n \in \mathbb{Z}\}\subseteq \mathbb{Z}$
+\begin{enumerate}[label=\textbf{\arabic*}.]
+\item Pruebe que la colecci\'on $\{S(a,b):(a,b) \in \mathbb{Z^+ \times \mathbb{Z}}\}$ es base para una topolog\'ia (que llamaremos $\tau_F$) sobre $\mathbb{Z}$.
+\begin{proof}
+Sea $x \in \mathbb{Z}$. En primer lugar, $x \in S(1,0)$ ya que $x=1*x+0$.
+
+En segundo lugar, sea $S(a,b)$ y $S(c,d)$ conjuntos de la colecci\'on y sea $x \in S(a,b) \cap S(c,d)$. De manera equivalente, $\underline{x=an+b=cm+d}\text{ }(*)$, para algunos $n,m \in  \mathbb{Z}$.
+Se puede demostrar que $x \in S(ac,x) \subseteq S(a,b) \cap S(c,d)$.
+
+Por un lado, $x \in S(ac,x)$, pues $x=ac*0+x$. Por otro lado, sea $y \in S(ac,x)$ (es decir, que $y=acp+x$, $p \in \mathbb{Z}$). Ahora,
+\begin{eqnarray}
+y&=&acp+x \nonumber
+\\ &=&acp+an+b \text{ por  }(*)\nonumber
+\\ &=&a(cp+n)+b\nonumber
+\end{eqnarray}
+Similarmente
+\begin{eqnarray}
+y&=&acp+x \nonumber
+\\ &=&acp+cm+d \text{ por }(*)\nonumber
+\\ &=&c(ap+m)+d\nonumber
+\end{eqnarray}
+
+Lo que muestra que $y \in S(a,b) \cap S(c,d)$.
+\end{proof}
+\item Muestra que la topolog\'ia $\tau_F$ no es la (usual) topolog\'ia discreta sobre $\mathbb{Z}$. M\'as a\'un, muestre que ning\'un conjunto finito $A \subset \mathbb{Z}$ es abierto.
+
+\begin{proof}
+Se debe exceptuar el vac\'io, que siempre es finito y abierto.
+
+Obs\'ervese que la base esta formada por subconjuntos infinitos de $\mathbb{Z}$. Como cualquier conjunto abierto corresponde a la uni\'on de elementos de la base, se concluye que si un conjunto es abierto entonces este es infinito. 
+\end{proof}
+\item Muestre que $(\mathbb{Z}, \tau_{F})$ es un espacio de Hausdorff. 
+\begin{proof}
+Sea $x,y \in \mathbb{Z}$ tales que $x \not = y$. Sin perdida de generalidad suponga que $x < y$. Vamos a demostrar que $S(m,x)$ y $S(m,y)$, con $m =y-x+1$ son dos conjuntos abiertos que contienen a $x$ y $y$ respectivamente y que son disyuntos.
+
+Lo primero es cierto, porque $x=0*m+x$ y $y=0*m+y$, es decir, $x \in S(m,x)$ y $y \in S(m,y)$.
+
+Para la otra proposici\'on, supongase por contradicci\'on que no son disyuntos. Entonces tomamos $z$ en la intersecci\'on y existen $p,q \in \mathbb{Z}$ tales que $z=mp+x=mq+y$. De aqu\'i deducimos que $m(p-q)=y-x$, es decir que $m$ divide a $y-x$. Pero tenemos que $0<y-x<m$, por lo cual esto es una contradicci\'on.
+\end{proof}
+\item Pruebe que cada $S(a,b)$ es un conjunto cerrado (i.e. complemento de un abierto).
+
+\begin{proof}
+Veamos que el complemento de $S(a,b)$ lo podemos escribir como uni\'on de conjuntos en la base, es decir un conjunto abierto.
+
+Vamos a demostrar que
+\begin{equation}
+S(a,b)^C=\bigcup_{i=1}^{a-1} S(a,b+i) \nonumber
+\end{equation}
+
+Utilizamos el m\'etodo de doble contenencia. Primero tomemos un elemento $x$ en la uni\'on. Entonces existen $n,i \in \mathbb{Z}$, tales que $0<i<a$ y $x=an+b+i$. Si suponemos por contradicci\'on que $x \in S(a,b)$, entonces $x=am+b$ para alg\'un $m \in \mathbb{Z}$.
+
+A partir de estas dos expresiones de $x$ concluimos que 
+\begin{eqnarray}
+am+b&=&an+b+i\nonumber
+\\ am&=&an+i\nonumber
+\\ a(m-n)&=&i\nonumber
+\end{eqnarray}
+
+Es decir que $a$ divide a $i$, pero esto no es posible por el intervalo en que se encuentra $i$ $(0<i<a)$. Luego $x \in S(a,b)^C$
+
+Para la otra contenencia si $x \not \in S(a,b)$ entonces no existe ningun $n$ tal que $x=an+b$. Por el algortimo de la divisi\'on sabemos que existen enteros $q,r \in \mathbb{Z}$ tales que $x-b=aq+r$ con $0 \leq r < q$. Pero $r \not =0$ pues de lo contrario contradicir\'ia nuestra hip\'otesis inicial. Por lo tanto, vemos que $x=aq+b+r$, es decir que $x \in S(a,b+r)$, y por lo tanto pertenece a la uni\'on.
+\end{proof}
+
+\item Muestre que
+\begin{equation}
+\mathbb{Z}\backslash\{-1,1\} = \bigcup_{p \text{ primo}} S(p,0) \nonumber
+\end{equation}
+y use los problemas 2 y 4 para concluir que existen infinitos primos.
+
+\begin{proof}
+La igualdad anterior se da como consecuencia del teorema fundamental de la aritm\'etica. Todo n\'umero entero positivo tiene una expansi\'on en primos que es \'unica. Por lo tanto, existe un $p$ primo tal que $p$ divide a $n$, es decir, $n \in (S,p)$. El n\'umero 1 (y el -1) es un caso especial ya que por convenci\'on es equivalente a la multiplicaci\'on de un conjunto vac\'io de primos, de tal manera que no hay ningun primo que divida a 1 (similarmente se cumple para el -1). Por otra parte, si $m$ es negativo entonces podemos escribirlo como $m=-1*n$ para $n>1$ y por lo tanto por transitividad de la divisi\'on existe un $p$ que divide a $m$. 
+
+Ahora por el punto 4) tenemos que los conjuntos en la uni\'on tambi\'en son cerrados.
+
+Por las leyes de De morgan tenemos que la uni\'on finita de conjuntos cerrados es cerrada, partiendo del hecho que la intersecci\'on finita de a biertos es abierta. Sea $\mathcal{A}$ una colecci\'on finita de conjuntos.
+
+\begin{equation}
+\bigcup_{A\in\mathcal{A}} A^C=(\bigcap_{A\in\mathcal{A}} A)^C \nonumber
+\end{equation}
+
+Vemos que la parte derecha de la igualdad es el complemento de un conjunto abierto y por lo tanto es cerrado.
+
+Si suponemos que el n\'umero de primos es finito entonces la uni\'on es un conjunto cerrado por lo anterior y por lo tanto su complemento es abierto. Pero esto es una contradicci\'on con el punto 2) porque el conjunto $\{-1,1\}$ es finito.
+\end{proof}
+\end{enumerate}
+\end{document}

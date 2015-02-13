@@ -1,0 +1,98 @@
+\documentclass[letter,twoside,11pt]{article}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{fullpage}
+\usepackage{latexsym}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+\title{Topolog\'ia I: Tarea \#3}
+\newtheorem{lemma}{Lema}
+\author{Jonathan Andr\'es Ni\~no Cort\'es}
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item Muestre que si $(X,\tau)$ es un espacio puerta y adem\'as es Haussdorff, entonces $X$ tiene a lo sumo un punto l\'imite.
+\begin{proof}
+Basada en la demostraci\'on de \url{http://en.wikipedia.org/wiki/Door_space}
+
+En primer lugar la definici\'on de punto l\'imite implica que $x$ es un punto l\'imite de $X$ si y solo si singlet\'on $\{x\}$ no es abierto.
+Supongamos que $p$ es un punto l\'imite, y tomemos cualquier punto $x \in X$, tal que $x \not = p$. Por la propiedad de Haussdorff tenemos que existen conjuntos abiertos $U$ y $V$ tales que $U \cap V = \emptyset$, $p \in U$, y $x \in V$. Ahora, por un lado tenemos que $V\backslash\{x\}\cup\{p\}$ no es abierto. Si lo fuera entonces tendriamos que $(V\backslash\{x\}\cup\{p\})\cap U= \{p\}$ ser\'ia abierto. Lo que contradice nuestra suposici\'on de que $p$ es un punto limite.
+
+Por lo tanto por la propiedad del espacio puerta $V\backslash\{x\}\cup\{p\}$ debe ser cerrado. Es decir que $X\backslash(V\backslash\{x\}\cup\{p\})$ es abierto. Finalmente, si tomamos $X\backslash(V\backslash\{x\}\cup\{p\})\cap V$ tambi\'en seria abierto. Pero este ultimo es igual a $\{x\}$ por lo que $x$ es un punto aislado. Con esto concluimos que cualquier otro punto no es punto l\'imite.
+\end{proof}
+\item Sea $X \subseteq \mathbb{R}$ con la topolog\'ia de subespacio. Muestre que si $X$ es un espacio puerta entonces $X$ es enumerable.
+
+\begin{proof}
+Por un teorema sabemos que la topolog\'ia de subespacio de una topolog\'ia de Haussdorff es de Haussdorff. Tambi\'en sabemos que la topolog\'ia usual de $\mathbb{R}$ es de Haussdorff pues se puede interpretar como la topolog\'ia del orden simple asociado a $\mathbb{R}$.
+
+Entonces $X$ es un espacio puerta que \'ademas es de Haussdorf. Utilizando el punto anterior concluimos que tiene a lo sumo un punto l\'imite.
+
+Como un conjunto enumerable m\'as un elemento tambi\'en es enumerable, solo falta demostrar que una topolog\'ia de subespacio discreta debe ser a lo sumo enumerable.
+
+Tomemos $X$ una colecci\'on de puntos aislados de $\mathbb{R}$. Como son aislados yo tengo que para todo $x \in X$ existe una vecindad $B(x)_{\epsilon_x}$de $x$ en $\mathbb{R}$ tal que $X\cap B(x)_{\epsilon_x}=\{x\}$. Es necesario demostrar que puedo encontrar $U_{x}$ tales que si $x \not = y$ entonces $U_{x}\cap U_{y}=\emptyset$.
+
+\begin{lemma}
+Sea $x ,y ,z \in X$ tales que $x<y<z$. Entonces $B(x)_{\epsilon_x} \cap  B(z)_{\epsilon_z} =\emptyset$.
+
+\begin{proof}
+Tome $a \in B(x)_{\epsilon_x} \cap B(z)_{\epsilon_z}$. Tenemos que $y \not \in B(x)_{\epsilon_x}$, luego $y-x>\epsilon_x$ Por otra parte $y \not \in B(z)_{\epsilon_z}$ por lo que $z-y>\epsilon_y$. Suponga que no $ B(x)_{\epsilon_x} \cap B(z)_{\epsilon_z} $es vac\'io, entonces se puede tomar $b \in B(x)_{\epsilon_x} \cap  B(z)_{\epsilon_z}$. Tenemos que $z-b<|z-b|<z-y$ y $b-x<|b-x|<y-x$. De la primera se concluye que $-b<-y$ es decir que $b>y$ y de la segunda se concluye que $b<y$. Llegamos a una contradicci\'on con la asimetria del orden de los reales por lo que nuestra suposici\'on es falsa. Luego el conjunto es vac\'io.
+\end{proof}
+\end{lemma}
+
+\begin{lemma}
+Si $a$ y $b$ son puntos en $X$ con $a<b$ tales que sus bolas respectivas se intersecan, entonces no existe ningun elemento $c \in X$ tal que $a<c<b$ (el intervalo abierto entre $a$ y $b$ intersecado con $X$ es vac\'io).
+\begin{proof}
+Si las bolas se intersectan entonces cualquier elemento $c \in (a,b)$ pertenece o bien a la bola de $a$ o a la bola de $b$. Como la intersecci\'on de estas bolas con $X$ solo debe tener a $a$ y a $b$ concluimos que $(a,b) \cap X= \emptyset$
+\end{proof}
+\end{lemma}
+\begin{lemma}
+Sea $x \in X$, entonces hay a lo sumo un punto $y>x$ tal que la bolas de $x$ y $y$ se pueda intersecar y hay a lo sumo un punto $z<x$ tal que la bola de $x$ y $y$ se pueden intersecar. Por lo tanto solo pueden haber a lo sumo dos bolas que intersequen a la bola de $x$.
+
+\begin{proof}
+Supongamos que $y>x$ es tal que las bolas se intersecan. Por el Lema 2 no hay elementos de $X$ en el intervalo $(x,y)$ y por el Lema 1 cualquier otro punto mayor que $x$ es vac\'io. Similarmente si suponemos que $z<y$ es tal que las bolas se intersecan entonces no hay elemento entre $z$ y $y$ por el Lema 2 y cualquier elemento menor a $z$ es tal que su bola no interseca a la de $x$. 
+\end{proof}
+\end{lemma}
+
+Este ultimo resultado nos permite construir el conjunto $U_{x}$ que estabamos buscando. Si la bola $B(x)_{\epsilon_x}$ no se interseca con ninguna otra bola entonces tomamos $U_x$ como esa bola. Por otro lado, si se intersecan con una o dos bolas puedo tomar como $U_x$ la bola con radio menor a la mitad del minimo entre las distancias de los centros de las bolas que se intersecan. De esta forma se genera un conjunto de bolas abiertas disyuntas que contienen a cada uno de los puntos aislados. 
+
+Por otra parte, por an\'alisis sabemos que los racionales son densos dentro de los reales de tal manera que dentro de cualquier abierto de $\mathbb{R}$ siempre puedo encontrar un racional. Por lo tanto, por cada conjunto abierto hay un racional distinto. Si suponemos que $X$ es no enumerable entonces $\{U_{x}\}$ tambi\'en seria no enumerable y por lo tanto abrian no enumerables racionales. Contradicci\'on.
+\end{proof}
+
+\item Sea $A \subset S_{\Omega}$. Demuestre que si $A$ es enumerable entonces $\overline{A}$ es enumerable.
+
+\begin{proof}
+
+Tomemos el conjunto $B= \cup_{a \in A}S_{a}$. Esta ser\'ia la uni\'on de una colecci\'on enumerable de conjuntos enumerables y por lo tanto tambi\'en es enumerable. Ahora si suponemos que $A$ no tiene una cota superior entonces para todo $x \in S_{\Omega}$ se cumple que existe $a \in A$ tal que $x<a$ (de lo contrario ser\'ia una cota superior). Entonces $x \in S_{a} \subseteq B$. Por lo tanto $S_{\Omega} \subseteq B$ y entonces $B$ no ser\'ia enumerable. Contradicci\'on.
+
+Por lo tanto existe una cota superior de $A$. Por el primer punto de la tarea anterior entonces se tendria que $A$ tiene supremo $\alpha$ y tendriamos que $C=S_{\alpha} \cup \{\alpha\}$ seria enumerable pues es la uni\'on de una secci\'on que es enumerable y un singlet\'on.
+
+Adem\'as es cerrado porque su complemento $(\alpha,\infty)$ es abierto en $S_{\Omega}$ y ser\'ia tal que $A \subseteq C$. Como la clausura es el m\'inimo cerrrado que contiene a $A$ concluimos que $A \subseteq \overline{A} \subseteq C$. Y por lo tanto $\overline{A}$ es tambi\'en enumerable.
+\end{proof}
+
+\item Pruebe que si $f: \mathbb{R_{\ell}} \mapsto S_{\Omega}$ es una funci\'on continua entonces $f$ no es inyectiva. 
+\begin{proof}
+Vamos a demostrar la contrarec\'iproca. Si $f$ es inyectiva entonces la funci\'on no es continua. Para demostrar que una funci\'on es continua basta con demostrar que para una base de la topolog\'ia de llegada todos los b\'asicos tienen preimagen abierta. Para demostrar que una función no es continua basta encontrar un abierto tal que su preimagen no es abierta. Si se prueba que ningun elemento de la base tiene preimagen abierta. a excepción del vac\'io, entonces facilmente se puede encontrar dicho abierto. Por ejemplo, se puede tomar cualquier elemento en el rango de $f$ y tomar un básico $B$ de ese elemento. Como hay un elemento en el rango tendriamos que $f^{-1}(B)$ no es vac\'io y por lo tanto su preimagen no sería abierta.
+
+Una base para la topolog\'ia de $S_{\Omega}$ serian todos los abiertos enumerables. Para demostrar esto podemos tomar cualquier conjunto abierto $A$ en $S_{\Omega}$. Y podemos tomar cualquier elemento $x \in A$. Por la tarea anterior sabemos que todo elemento tiene sucesor. Sea el sucesor denotado como $x+1$. La secci\'on $S_{x+1}$ es un conjunto abierto enumerable que contiene a $x$. Por lo tanto, la intersecci\'on $S_{x+1} \cap A$ seria un conjunto enumerable tal que $x$ pertenece al conjunto y a su vez es subconjunto de $A$.
+
+Por otra parte en la topolog\'ia de $\mathbb{R}_{\ell}$ una base son los conjuntos de la forma $[a,b)$. Cualquier conjunto de esta forma es vacío o no enumerable. Como cualquier conjunto abierto es uni\'on de estos conjuntos concluimos que todo conjunto abierto es vacío o no enumerable.
+
+Finalmente, si tomamos cualquier funci\'on inyectiva $f$, tenemos que la cardinalidad de $f^{-1}(X)$ es menor o igual a la cardinalidad de $X$. Pero si tomamos cualquier b\'asico en $S_{\Omega}$ su preimagen seria a lo sumo enumerable, y por lo tanto concluimos que es vac\'ia o no es abierta. Por lo discutido al principio $f$ no puede ser continua.
+\end{proof}
+
+\item Sean $f:A \to B$ y $g: C \to D$ funciones continuas. Definimos la funci\'on $ f \times g: A \times C \to B \times D $ por la ecuaci\'on
+\begin{equation}
+(f \times g)(\langle a,c \rangle)=\langle f(a),g(c) \rangle \nonumber
+\end{equation}
+Pruebe que $f \times g$ es continua.
+
+\begin{proof}
+Basta con demostrar que cualquier abierto de una base de $B \times D$ tiene preimagen abierta por $f \times g$.
+
+Una base son los conjuntos de la forma $U \times V$ con $U$ abierto en $B$ y $V$ abierto en $D$. Tomemos $(f \times g)^{-1}(U \times V)$. Esto es igual a $ f^{-1}(U) \times g^{-1}(V) $. Por nuestras hipotesis tenemos que $f^{-1}(U)$ y $g^{-1}(V)$ son abiertos en $A$ y $C$ respectivamente, por lo que  $ f^{-1}(U) \times g^{-1}(V) $ es abierto tambi\'en. Concluimos que $f \times g$ es continuo. 
+\end{proof}  
+\end{enumerate}
+\end{document}

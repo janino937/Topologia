@@ -1,0 +1,127 @@
+\documentclass[letter,twoside,11pt]{article}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{fullpage}
+\usepackage{latexsym}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\title{Topolog\'ia I: Tarea \#2}
+\newtheorem{lemma}{Lema}
+\author{Jonathan Andr\'es Ni\~no Cort\'es}
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item Muestre que si $(X,<)$ es un buen orden y $A \subseteq X$ tiene una cota superior entonces $A$ tiene supremo.
+\begin{proof}
+Tome $C=\{x\in X\:|\:x\geq a, \;\forall a \in A \}$ el conjunto de todas las cotas superiores de $A$. Por la suposici\'on de que $A$ tiene una cota superior este conjunto no es vac\'io y por la propiedad del buen orden este conjunto tiene un m\'inimo $\alpha$ que es por definici\'on el supremo de $A$.
+\end{proof}
+\item Considere $S_{\Omega}$ con la topolog\'ia del orden (i.e. la inducida por su buen orden). Pruebe que para cualquier $C \subseteq S_{\Omega}$, las siguientes afirmaciones son equivalentes:
+\begin{enumerate}
+\item $C$ es cerrado.
+\item Para todo $A \subseteq C$ enumerable, sup $A \in C$.
+\end{enumerate}
+\begin{proof}
+Por el punto anterior y el Teorema 10.3 sabemos que cualquier conjunto $A \in C$ enumerable tiene supremo.
+
+Ahora demostramos los siguientes lemas:
+\begin{lemma}
+Sea $A$ un conjunto tal que tenga supremo. Sea $b <$ sup $(A)$. Entonces existe $a \in A$ tal que $b < a \leq$ sup $A$.
+\begin{proof}
+Como $b<$ sup $A$ tenemos que $b$ no es una cota superior de $A$ porque es menor a la m\'inima cota superior. Esto es equivalente a que existe un elemento $a \in A$ tal que $b>a$ y por definici\'on de supremo sabemos que $a \leq$ sup $A$. 
+\end{proof}
+\end{lemma}
+\begin{lemma}
+En $S_{\Omega}$, todos los elementos tienen un sucesor.
+
+En primer lugar notese que $S_{\Omega}$ no tiene un elemento m\'aximo pues por su definici\'on $\Omega$ no se encuentra en el conjunto.
+
+\begin{proof}
+Tomemos un elemento $s \in S_{\Omega}$, y tomemos el conjunto $\{x \in S_{\Omega} \:|\:s > x \}$ que no es vac\'io pues no hay m\'aximo en este conjunto. Por el principio del buen orden este conjunto tiene un m\'inimo y este es el sucesor de $s$ que denotamos $s+1$. 
+\end{proof}
+\end{lemma}
+
+Supongamos que $C$ es cerrado (esto es equivalente a que el complemento de $C$ es abierto) y supongamos por contradicci\'on que existe un subconjunto enumerable de $A$ tal que sup $A \not \in C$. Sabemos que la topolog\'ia del orden tiene como base los intervalos y rayos en el espacio. Entonces como $C^c$ es abierto existe un conjunto de la base contenido en $C^c$ y tal que sup $A$ pertenece a dicho conjunto. Este conjunto debe ser de la forma $(\infty,b)$, $(a,b)$ $(a, \infty)$. Obs\'ervese que no puede ser de la primera forma porque claramente $A \subseteq (\infty,b)$ si sup $A < b$. Pero por otra parte si fuera de la otra forma entonces tenemos que $a<$ sup $A$. Y por el Lema 1 existe $b \in A$ tal que $a<b<$ sup $A$. Llegamos a una contradicci\'on porque entonces el conjunto no perteneceria a $C^c$.
+
+Ahora supongamos que se cumple b). Queremos probar que $C^c$ es abierto, es decir que para cualquier $c\in C^C$ existe un conjunto b\'asico al que $c$ pertenece y que esta contenido en $C^c$. Para construir este conjunto tomemos un elemento $c$ y tomemos la secci\'on de $S_{\Omega}$ por $c$, $S_c$. Por las propiedades de $S_{\Omega}$ esta secci\'on es enumerable. Entonces el conjunto $A= C \cap S_c$ es un subconjunto enumerable de $C$ y por lo tanto es vac\'io o tiene un supremo y esta contenido en $C$. Por otra parte, por el Lema 2, todos los elementos tienen un sucesor. Denotamos al sucesor de $c$ por $c+1$. 
+
+Si hay supremo, el intervalo (sup $A, c+1)$, es el conjunto que estamos buscando. Si suponemos que hay un elemento de $C$ en este intervalo entonces tambi\'en perteceria en $A$. Y este elemento ser\'ia mayor a sup $A$. Contradicci\'on.
+
+Si la intersecci\'on es vac\'ia entonces el intervalo $(-\infty, c+1)$ tambi\'en funciona. Si hay un elemento de $C$ en este intervalo entonces $A$ no ser\'ia vac\'io. Contradicci\'on.
+
+Por lo tanto $C$ es cerrado.
+\end{proof}
+
+\item Considere los conjuntos $X=\{a,b,c,d\}$ y $Y=\{\alpha,\beta,\gamma\}$ con las topolog\'ias $\tau_1=\{\emptyset,\{a,b\},\{c,d\},X\}$ y $\tau_2=\{\emptyset,\{\alpha\},\{\alpha,\beta\},Y\}$ respectivamente. Liste todos los elementos de la topolog\'ia producto sobre $X \times Y$.
+\begin{proof}
+El conjunto $B=\{U \times V \:|\:U \in \tau_1 \wedge V \in \tau_2\}$ forma una base para la topolog\'ia producto. Los elementos que pertenecen a este conjunto son
+\begin{multline}
+\{\emptyset,\{(a,\alpha),(b,\alpha)\},\{(a,\alpha),(a,\beta),(b,\alpha),(b,\beta)\},\{(a,\alpha),(a,\beta),(a,\gamma),(b,\alpha),(b,\beta)(b,\gamma)\},
+\\\{(c,\alpha),(d,\alpha)\},\{(c,\alpha),(c,\beta),(d,\alpha),(d,\beta)\},\{(c,\alpha),(c,\beta),(c,\gamma),(d,\alpha),(d,\beta)(d,\gamma)\},
+\\\{(a,\alpha),(b,\alpha),(c,\alpha),(d,\alpha)\},\{(a,\alpha),(a,\beta),(b,\alpha),(b,\beta),(c,\alpha),(c,\beta),(d,\alpha),(d,\beta)\},
+\\\{(a,\alpha),(a,\beta),(a,\gamma),(b,\alpha),(b,\beta),(b,\gamma),(c,\alpha),(c,\beta),(c,\gamma),(d,\alpha),(d,\beta),(d,\gamma)\}\} \nonumber
+\end{multline}
+Los conjuntos que forman parte de la topolog\'ia son todos los anteriores m\'as algunos que se pueden obtener como uniones de estos conjuntos. Los conjutnos que faltan son:
+\begin{multline}
+\{ \{(a,\alpha),(b,\alpha),(c,\alpha),(c,\beta),(d,\alpha),(d,\beta)\},
+\\\{(a,\alpha),(b,\alpha),(c,\alpha),(c,\beta),(c,\gamma),(d,\alpha),(d,\beta),(d,\gamma)\},\{(a,\alpha),(a,\beta),(b,\alpha),(b,\beta),(c,\alpha),(d,\alpha)\},\\\{(a,\alpha),(a,\beta),(b,\alpha),(b,\beta),(c,\alpha),(c,\beta),(c,\gamma),(d,\alpha),(d,\beta)(d,\gamma)\}\\
+\{(a,\alpha),(a,\beta),(a,\gamma),(b,\alpha),(b,\beta),(b,\gamma),(c,\alpha),(d,\alpha)\},\\\{(a,\alpha),(a,\beta),(a,\gamma),(b,\alpha),(b,\beta),(b,\gamma),(c,\alpha),(c,\beta),(d,\alpha),(d,\beta)\}\} \nonumber
+\end{multline}
+\end{proof}
+\item Si $L$ es una recta en el plano, describa la topolog\'ia $L$ heredada como un subespacio de $\mathbb{R}_{\ell} \times \mathbb{R}$ y un subespacio de $\mathbb{R}_{\ell} \times \mathbb{R}_{\ell}$. En cada caso es una topolog\'ia familiar. 
+\begin{proof}
+Una recta $L$ la podemos representar como el conjunto de los pares de puntos que satisfacen la ecuaci\'on $y=mx+b$ o $x=a$ en el caso que sea una recta vertical. Para hablar de una topolog\'ia en las rectas vamos a definir un orden. Sean $(a,b), (c,d) \in L$, $(a,b)>(c,d)$ si $a>b$ o $a=c$ y $b>d$. (Extra\~namente coincide con el orden lexicogr\'afico). Sin embargo vemos que $a=c$ solo se cumple cuando la recta es vertical en cuyo caso solo depende de la coordenada $y$. As\'i, podemos representar el intervalo abierto en $L$, $(a \times b, a \times c)$ como $(b,c)$. Similarmente vemos que si la recta no es vertical entonces el orden solo depende de la coordenada $x$, por lo que el intervalo abierto $(a \times b, c \times d)$ se puede representar como $(a,c)$.
+
+Comenzamos considerando la recta como subespacio de $\mathbb{R}_{\ell} \times \mathbb{R}$. 
+
+Vamos a demostrar que si la recta es de la forma $x=a$ entonces la topolog\'ia de subespacio es "isomorfa" a la topolog\'ia usual de $\mathbb{R}$.
+
+Primero tomemos cualquier conjunto de la base de la topolog\'ia usual de $(b,c)$ y veamos que es generado por la base heradada de $\mathbb{R}_{\ell} \times \mathbb{R}$. Esto es sencillo porque $(b,c)$ lo podemos ver como $[a,a+1)\times(b,c) \cap L$. Ahora probamos que cualquier conjunto $X$ de la forma $[x,y) \times (z,w) \cap L$ la podemos generar con conjuntos de la base de la topolog\'ia del orden de $L$. Tomemos $p \in X$, es decir, que $p = a \times c$ con $x\leq a<y$ $z<c<w$. Entonces podemos tomar el intervalo abierto $(z,w)$ y vemos que $p \in (z,w)\subseteq X$.
+
+Ahora si la recta es de la forma $y=mx+n$ podemos demostrar que la topolog\'ia es "isomorfa" a $\mathbb{R}_{\ell}$. Primero tome $[a,b)$ y tome algun $x \in [c,d)$, entonces vemos que $[a,b)=[a,b) \times (c,d)$ con $c<$min$(ma+n,mb+n)$ y $d>$max$(ma+n,mb+n)$. 
+
+Ahora para el converso tomese $X=[a,b) \times (c,d) \cap L$ y tomemos un punto $p \in X$. Entonces, $a = x \times y$ con $a\leq x<b$ y $c<y<d$. Pero tambi\'en se cumple que $y=mx+n$, es decir que $c<y<d$ o de lo contrario la intersecci\'on es vac\'ia. Debemos considerar varios casos. Si $m=0$, entonces el intervalo $[x,b)$ sirve automaticamente, pues $x \times n < b \times n$.
+
+Si $m>0$ podemos tomar el intervalo $[x,$ min$(b,d'))$. Donde $d=md'+n$. Como la recta es creciente tenemos que $y<d$ implica que $x<d'$. Por lo tanto, el intervalo esta bien definido.
+
+Si $m<0$ podemos tomar el intervalo $[x,$ min$(b,c'))$. Donde $c'$ es tal que $c=mc'+n$. Como la recta es decreciente, $y>c$ implica que $x<c'$, por lo cual el intervalo esta bien definido.
+
+Si se toma ahora $L$ como subespacio de $\mathbb{R}_{\ell} \times \mathbb{R}_{\ell}$. Vemos la necesidad de considerar varios casos. Si $x=a$ entonces la topolog\'ia es $\mathbb{R}_{\ell}$. Primero porque $[b,d)=[a,a+1) \times [b,d) \cap L$. Y segundo porque para cualquier $X=[x,y) \times [z,w) \cap L$ tenemos que si $x \in X$ entonces $x = a \times b$ para $z \leq b<w$. Luego el conjunto $[z,w)$ es tal que $x \in [z,w) \subseteq X$. 
+
+Ahora si la recta es de la forma $y=mx+n$. Tomamos $X=[a,b) \times [c,d) \cap L$. Tenemos que si $x \in X$ entonces $a\leq x < b$ y por el otro lado $c \leq mx+n<d$.
+
+Tenemos que los casos cuando $m=0$ y $m>0$ son indenticos porque los supuestos que se necesitaban para que los intervalos estuvieran bien definidos se siguen cumpliendo ($x<b$ y $ax+b<d$). Luego en estos casos la topolog\'ia sigue siendo $\mathbb{R}_{\ell}$
+
+Sin embargo, cuando $m<0$ la topolog\'ia en $L$ es diferente. Ahora el supuesto es que $c\leq y$ y entonces debemos tener en cuenta el caso en que $y=mx+n=c$. Entonces $c'=x$ y por lo tanto el intervalo tentativo $[x,c')$ no esta bien definido. 
+ 
+La topolog\'ia en este caso es la topolog\'ia discreta de $L$ para demostrar esto tomemos cualquier punto $p=x \times y \in L$ con $y =mx+n$. Se puede tomar el conjunto $X=[x,x+1) \times [y,y+1) \cap L$ y podemos demostrar que si $q \in X$ entonces $q=p$. En efecto, por definici\'on de pertenencia $q = x' \times y'$ para $x \leq x' < x+1$ y $y \leq y' < y+1$, pero adem\'as $y'=mx'+n$
+
+Si suponemos que $x \not = x'$ entonces $x'>x$ y como $m<0$, tendriamos que $y'<y$. Contradicci\'on porque $y' \geq y$.
+
+Igualmente si suponemos que $y \not = y'$ entonces $y' > y$ y por lo tanto $x' < x$ que contradice el hecho que $x' \geq x$. Por lo tanto, $x'=x$, $y' = y$ y $p=q$.   
+\end{proof}
+\item Sea $I = [0,1]$. Compare la topolog\'ia producto sobre $I \times I$, la topolog\'ia del orden de diccionario sobre $I \times I$, y la topolog\'ia que $I \times I$ hereda como un subespacio $\mathbb{R}\times \mathbb{R}$ en la topolog\'ia del orden de diccionario.
+\begin{proof}
+La topolog\'ia del producto de $I \times I$ (la vamos a llamar $\tau_3$) es la topolog\'ia que hereda como subespacio de $\mathbb{R} \times \mathbb{R}$ con la topolog\'ia usual. Una base para $I$ son los intervalos y rayos, es decir, los intervalos de la forma $(a,b)$,$[0,b)$ y $(a,1]$. Y una base para la topolog\'ia del producto serian los productos cruz entre estos intervalos. Otra base son las bolas abiertas intersecadas con $I \times I$.
+
+Por otra parte, en la topolog\'ia del orden de diccionario en $I \times I$ (la vamos a llamar $\tau_2$) los b\'asicos son de nuevo intervalos y rayos pero esta vez el orden de diccionario impone una estructura diferente. Un abierto b\'asico es de la forma $(a \times b, c \times d)$. con el orden de diccionario. ($a \times b$ denota el par ordenado $(a,b)$)
+
+Finalmente, la topolog\'ia heredada de $\mathbb{R} \times \mathbb{R}$ con el orden de diccionario (la vamos a llamar $\tau_3$) difiere de la anterior en que hay conjuntos que son abiertos que en la anterior no lo son. Podemos probar que una base para esta topolog\'ia son los intervalos de la forma $(a \times b, a \times c)$, $[a \times 0, a \times b)$ o $(a \times b, a \times 1]$
+
+El conjunto $(1/2 \times 1/3 , 1/2 \times 2/3)$ es abierto en $\tau_2$ y en $\tau_3$ pero no es abierto en $\tau_1$. Como se mostr\'o anteriormente este es un conjunto que pertenece a las bases que definimos para $tau_2$ y $tau_3$. Ahora para probar que no es abierto en $tau_1$, tomemos el punto $1/2 \times 1/2$. Tome cualquier bola de radio $\epsilon$ alrededor de este punto. Ahora tomemos el elemento $c=$ min$(b/2,b-\epsilon/2)\times 1/2$. Vemos que el punto $c$ pertenece a la bola pero no a nuestro intervalo. Por lo tanto no es abierto en $\tau_1$.
+
+El conjunto $(1/2 \times 0 , 1/2 \times 1]$ es abierto en $\tau_3$ pero no es abierto en $\tau_2$. Es abierto en $\tau_3$ porque es la intersecci\'on de $(1/2 \times 0 , 1/2 \times 2)$ intersecado con $I \times I$. Por otra parte, para probar que no es abierto en $\tau_2$ tomemos el punto $x=1/2 \times 1$. Cualquier b\'asico que contenga al punto debe ser de la forma $(a',b')$ con $a'<x$ y $x<b'$ pero un punto que sea mayor estricto que $x$ debe ser de la forma $b'=a \times b$ con $a > 1/2$. Por propiedades de los reales tenemos que existe $c$ tal que $1/2<c<a$ y entonces tendriamos que cualquier punto de la forma $c \times d$ para cualquier $d \in [0,1]$ pertenece al intervalo $(a',b')$. Por lo tanto, $(a',b')$ no esta contenido en $(1/2 \times 0 , 1/2 \times 1]$, es decir, no es abierto.   
+
+El conjunto $(1/3,2/3)\times(1/2,1]$ es abierto en $\tau_1$ pero no es abierto en $\tau_2$. Es abierto en $\tau_1$ porque los conjuntos en el producto ambos son abiertos en $I$. Sin embargo, no es abierto en $tau_2$. Tomese de nuevo el punto $x=1/2 \times 1$. De manera analoga a la anterior un b\'asico $(a',b')$ que contenga a $x$ debe tener $b'= a \times b$ con $a>1/2$. Entonces podemos tomar un $c$ tal que $1/2<c<$min$(
+2/3,a)$. En particular tenemos que $y=c \times 0$ pertenece a $(a',b')$ pero no pertenece a $(1/3,2/3)\times(1/2,1]$.   
+
+$\tau_1 \subseteq \tau_3$. Sea $X$ un conjunto en la base de $tau_1$. Por nuestra discusi\'on anterior este es de la forma $((a,b) \times (c,d)) \cap (I \times I)$. Si es vac\'io claramente es generado por la base de $\tau_3$. Si no, entonces tomemos un $x \in X$. Por nuestra suposici\'on $x=e \times f$ con $a<e<b$ y $c<f<d$. Entonces podemos tomar el conjunto $B=(e \times c, e \times d) \cap (I \times I)$ que es b\'asico en $\tau_3$ y vemos que $x \in B \in X$.   
+
+
+$\tau_2 \subseteq \tau_3$. Tome un conjunto $X$ en la base de $tau 2$. Este es de la forma $(a',b')$ con el orden de diccionario. Este es igual al conjunto $(a',b')$ del orden de diccionario de $\mathbb{R} \times \mathbb{R}$ intersecado con $I \times I$.
+
+Concluimos que $\tau_1 \subsetneqq \tau_3$ y $\tau_2 \subsetneqq \tau_3$ mientras que $\tau_1$ y $\tau_2$ no son comparables.
+\end{proof}
+\end{enumerate}
+\end{document}
