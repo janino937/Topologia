@@ -1,0 +1,250 @@
+\documentclass[letter,twoside,12pt]{article}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{fullpage}
+\usepackage{latexsym}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+\title{Topología: Tarea \#4}
+\newtheorem{lemma}{Lema}
+\author{Jonathan Andrés Niño Cortés}
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item Suponga que para cada $ n \in \mathbb{N} $ tenemos un espacio topológico $ (X_n,\tau_n) $ metrizable (i.e. existe una métrica en $ X_n $ que genera la topología $ \tau_n $). Muestre que $ \prod_{n \in \mathbb{N}} X_n$ con la topología producto es metrizable.
+\begin{proof}
+Vamos a utilizar una estrategia similar a la utilizada para demostrar que $ \mathbb{R}^{\omega} $ es metrizable. Denotemos por $ d_n $ la métrica asociada al espacio $ X_n $. Entonces tomamos $ \overline{d_n}(x,y) = \text{ min}(d(x,y),1)$ la métrica estándar acotada derivada de $ d_n $. Entonces definimos la métrica de $ \prod_{n \in \mathbb{N}} X_n$ como 
+
+\begin{equation}
+D(x,y)=\text{sup}_{i \in \mathbb{N}}\Big(\Big\{\frac{\overline{d_i}(x_i,y_i)}{i}\Big\}\Big) \nonumber
+\end{equation}
+
+En primer lugar demostremos que es una métrica. Por una parte,
+
+\begin{eqnarray}
+D(x,x)&=&\text{sup}\Big(\Big\{\frac{\overline{d_i}(x_i,x_i)}{i}\Big\}\Big) \nonumber
+\\&=&\text{sup}\Big(\Big\{\frac{0}{i}\Big\}\Big) \nonumber
+\\&=&0 \nonumber
+\end{eqnarray}
+
+Por otra parte si $ D(x,y) = 0$ entonces tenemos que para todo $ i \in \mathbb{N} $ se cumple que $ \overline{d}_i\{x_i,y_i\} $ por lo que $ x_i = y_i $. Concluimos que $ x = y $.
+
+También tenemos que $ D(x,y) = D(y,x)$
+\begin{equation}
+D(x,y)=\text{sup}\Big(\Big\{\frac{\overline{d_i}(x_i,y_i)}{i}\Big\}\Big) = \text{sup}\Big(\Big\{\frac{\overline{d_i}(y_i,x_i)}{i}\Big\}\Big) = D(y,x)\nonumber
+\end{equation}
+
+Finalmente para probar la desigualdad triangular tomemos $x,y,z \in \prod_{n \i \mathbb{N}}X_n$. Tenemos que para todo $ i \in \mathbb{N} $
+
+\begin{equation}
+\frac{\overline{d}_i(x_i,z_i)}{i}\leq \frac{\overline{d}_i(x_i,y_i)}{i}+\frac{\overline{d}_i(y_i,z_i)}{i}  \nonumber
+\end{equation}
+
+pues $ \overline{d_i} $ es una métrica.
+
+Pero además,
+
+\begin{equation}
+\frac{\overline{d}_i(x_i,z_i)}{i}\leq \frac{\overline{d}_i(x_i,y_i)}{i}+\frac{\overline{d}_i(y_i,z_i)}{i}  \leq D(x,y)+D(y,z)\nonumber
+\end{equation}
+
+pues $ D(x,y) $ y $ D(y,z) $ son por definición los supremos de los conjuntos que contienen a $ \frac{\overline{d}_i(x_i,y_i)}{i} $ y $ \frac{\overline{d}_i(y_i,z_i)}{i} $ respectivamente.
+
+Por lo tanto tenemos que $ D(x,y) + D(y,z)$ es una cota superior para $ \Big\{\frac{\overline{d_i}(y_i,x_i)}{i}\Big\} $ y por lo tanto el supremo debe ser menor, es decir, $ D(x,z) \leq D(x,y)+D(y,z) $. 
+
+Ahora necesitamos probar que la topología de la métrica es igual a la topología del producto.
+
+En primer lugar tomese cualquier abierto de la topología producto.
+
+Este es de la forma
+\begin{equation}
+B=\prod_{i \in \mathbb{N}} U_i \nonumber
+\end{equation}
+
+donde $ U_i $ es abierto en la topología de $ X_i $ para $ i = \alpha_1, \cdots, \alpha_n $ y $U_i=X_n$ para los demás índices.
+
+Ahora tomemos un elemento $ x \in B $. La coordenada de $ x $ en el espacio $ X_i $ la vamos a denotar por $ x_i $.
+
+Para cada $X_{i} $ con $ i = \alpha_1 \cdots \alpha_n $ podemos hacer una bola de radio $ \epsilon_{i} $ alrededor de $ x_{i}
+ $ que este contenida en $ U_{\alpha_j} $. 
+
+Entonces tomamos $ \epsilon = $ min$ (\{\frac{\epsilon_{i}}{i}\}) $ donde $ i = \alpha_1 \cdots \alpha_n $ y la bola en $\prod_{n \i \mathbb{N}}X_n$ con centro en $ x $ y radio $ \epsilon $ es tal que esta contenida en $ B $.
+
+Para probar esto tomese cualquier elemento $y \in B_{\epsilon}(x)$. Tenemos que para todo $ i = \alpha_1, \cdots, \alpha_n$, $ \overline{d_i}(x_i,y_i)/i<\epsilon\leq\epsilon_i/i $ por lo que $ \overline{d_i}(x_i,y_i) < \epsilon_i$ y como la bola de radio $ \epsilon_i $ alrededor de $ x_i $ esta contenida en $ U_i $ se sigue que $y_i \in U_i$. Para los demás $ i $ es trivial que $ y_i \in U_i =X_i $. Esto implica que $y \in B$.
+
+En segundo lugar tómese un bola de radio $ \epsilon $ alrededor de $x$. Y tomese cualquier $y \in B_\epsilon(x)$. Entonces vamos a demostrar que existe un abierto de la topología producto contenido en esta bola.
+
+Por la propiedad arquimedeana siempre se puede encontrar un $ N \in \mathbb{N} $ tal que $ \epsilon*N>1 $, es decir tal que $ 1/N<\epsilon $. Para todos los $ i \geq N $ y para todo $ y_i \in X_i $ se cumple que $ \overline{d}_i(x_i,y_i)/i \leq 1/i < \epsilon$.
+
+Para los $ i < N $ tomemos la bola de radio $ \epsilon_i $ alrededor de $ y_i $, donde $ \epsilon_i<\epsilon-\overline{d_i}(x_i,y_i)\})$.
+  
+
+Sea $ B = \prod_{i \in \mathbb{N}} V_i $ donde $ V_i = B_{\epsilon_i}(y_i)$ para los $ i < N $ y $ V_i = X_n$ para $ i \geq N $.
+
+Claramente $y \in B$, ahora vamos a demostrar que $ B \subseteq B_{\epsilon}(x) $.
+
+Tomemos cualquier elemento $ b \in B $. Probemos que $ D(b,x)< \epsilon $.
+
+Obsérvese que para todo $ i \in \mathbb{N} $ tenemos que $ \overline{d_i}(x_i,b_i)/i < \epsilon$. Si $i\geq N$ esto es trivial porque $ \overline{d}_i(x,y)/i\leq 1/i \geq 1/N$. Si $ i<N $ entonces $\overline{d_i}(b_i,y_i)<\epsilon-d_i(x_i,y_i),d_i(x_i,y_i)$. 
+
+Entonces por desigualdad triangular tenemos que $ \overline{d_i}(x_i,b_i)/i \leq \overline{d_i}(x_i,y_i)/i + \overline{d_i}(y_i,b_i)/i < \overline{d_i}(x_i,y_i)/i + \epsilon - \overline{d_i}(x_i,y_i)i=\epsilon$. 
+
+Como solamente se consideran finitos de estos (hasta la coordenada $ n-1 $) puedo tomar 
+\begin{equation}
+M= \text{max}\Big(\Big\{\frac{\overline{d_1}(b_1,y_1)}{1}, \cdots, \frac{\overline{d_{n-1}}(b_1,y_{n-1})}{n-1},\frac{1}{n}\Big\}\Big)\nonumber
+\end{equation}
+
+Entonces $ D(b,x) \leq M < \epsilon$. Concluimos que $ b \in B_\epsilon(x) $.
+
+\end{proof}
+
+\item Sea $ (X,d) $ un espacio métrico separable (i.e. existe $ A \subseteq X $ enumerable tal que $ \overline{A}= X $). Muestre que $ X $ es homeomorfo a un subespacio de $ \mathbb{R}^{\omega} $.
+\begin{proof}
+
+Sea la función $ f: X \to \mathbb{R}^{\omega} $ definida como $ f(x) = (d(x,a_n))_{n \in \mathbb{N}} $.
+
+Primero demostramos que esta función es continua. Sea $ x,y  \in X$ tales que $ x \not = y $. Como el espacio es metrizable tenemos que es de Hausdorf. Entonces existe una bola que contiene a $x$ y otra que contiene a $y$ tal que son disyuntas. Es más, existe una bola centrada en $x$ y algun radio $ \delta >0 $ y otra centrada en $y$ con radio $ \gamma> 0 $ tal que son disyuntas entre sí. Y más aún podemos tomar las bolas centradas en los puntos con radio $\epsilon =$ min$(\delta,\gamma)$ y siguen siendo disyuntas.
+
+Pero además tenemos que $A$ es denso en X. Luego existe $a_n \in A$ tal que $ a_n \in B_\epsilon(x) $ y $ a_n \not \in B_\epsilon(y) $. Luego $ d(x,a_n)<\epsilon $ y $ d(y,a_n)>\epsilon $ por lo que $ f(x) \not = f(y)$.   
+
+Sea $ Y  = $ Rang($ f $)
+Ahora consideramos la imagen de una bola de radio $ \epsilon $ centrada en un elemento $ a_n $ de $ A $. Por definición, estos serán los elementos $x \in Y $ tales que $ 0 \leq (x)_n< \epsilon $. Como esta función es inyectiva podemos decir que la preimagen de los elementos en $Y$ tales que $0 \leq (x)_n< \epsilon$ sería la bola de radio $ \epsilon $ alrededor de $ a_n $. Este conjunto es abierto en $Y$ pues puede verse como los $ x \in  \mathbb{R}^{\omega}$ tales que $ (x)_n \in (-\epsilon,\epsilon) \cap $ Rang($ f $), pues por definición la distancia siempre es mayor o igual a 0. 
+
+Vamos a demostrar que la función $ f $ es continua. Para eso basta tomar un subbásico en la topología producto y demostrar que su preimagen es abierta en $X$. Un subbasico típico serían los $y \in Y$  tales que $  (y)_n \in (a,b)$ con $ 0<a<b $. Denotemos a este conjunto por $ S $. $ f^{-1}(S) $ serían los elementos $ x $ de $ X $ tales que $a<d(x,a_n)<b $. Esto es abierto porque para cualquier $ z \in f^{-1}(S) $ podemos tomar la bola de radio menor a min($ d(z,a_n)-a, b-d(z,a_n) $). y esta bola estaría contenida en $ f^{-1}(S) $.
+
+Nótese que la topología de $ X $ la puedo generar solamente con las bolas centradas en los elementos de $ A $. Tomemos cualquier $B_\epsilon(x)$ donde $x \in X$. Ahora tomemos cualquier elemento $ b  \in B_\epsilon(x)$. Tenemos además que existe una bola de radio $ \delta $ contenida y centro $b$ contenida en $ B_\epsilon(x) $. Entonces podemos tomar $ B_{\delta/2}(b) $ y como $A$ es denso tenemos que existe $ a_n \in A$ tal que $a_n \in  B_{\delta/2}(b) $.
+
+Finalmente la bola de radio $ \delta/2 $ alrededor de $ a_n $ es tal que contiene a $ b $ y esta contenida $ B_\epsilon(x) $. Pues por desigualdad triangular $ d(c,b) \leq d(c,a_n)+d(a_n,b)<\delta/2+\delta/2=\delta$.
+
+Ahora para demostrar que la inversa es continua también tomemos un básico típico de la topología de $ X $, es decir, una bola de radio $\epsilon$ centrada en algun punto $ a  \in A $, que se denotara  $ B $. Queremos demostrar que la imagen de $ f(B) $ es abierta y efectivamente este el caso por lo discutido al principio de la demostración.
+
+ 
+
+Ahora por otra parte si el centro no esta en $ A $, entonces 
+
+
+\end{proof}
+\item Muestre que la función $ D: \mathbb{R}^{\omega} \times \mathbb{R}^{\omega} \to \mathbb{R} $ definida por
+\begin{equation}
+d(x,y)= \sum_{i \in \omega} \frac{2^{-i}|x_i-y_i|}{1+|x_i-y_i|} \nonumber
+\end{equation}
+
+es una métrica y que la topología inducida por esta métrica es la misma topología producto de $ \mathbb{R}^{\omega} $.
+\begin{proof}
+
+Sea $ d $ una métrica. En primer lugar vamos a demostrar que la función $ d^*: X,X \to \mathbb{R} $ definida como $ d^*(x,y)\mapsto \frac{d(x,y)}{1+d(x,y)} $ es una métrica.
+
+\begin{equation}
+d^*(x,x)= \frac{d(x,x)}{1+d(x,x)}=\frac{0}{1}=0. \nonumber
+\end{equation}
+
+Además, si $ d^*(x,x) = 0$ entonces el numerador debe ser cero. Es decir, $ d(x,y)=0 $ lo que implica que $ x = y $.
+
+\begin{equation}
+d(x,y)=\frac{d(x,y)}{1+d(x,y)}=\frac{d(y,x)}{1+d(y,x)}=d(y,x) \nonumber
+\end{equation}
+
+Lo más díficil es la desigualdad triangular. Para esto considere la siguente cadena de equivalencias
+
+\begin{eqnarray}
+d^*(x,z)&\leq&d^*(x,y)+d^*(y,z)\nonumber
+\\\frac{d(x,z)}{1+d(x,z)}&\leq&\frac{d(x,y)}{1+d(x,y)}+\frac{d(y,z)}{1+d(y,z)}\nonumber
+\\\frac{d(x,z)}{1+d(x,z)}&\leq&\frac{d(x,y)+d(x,y)d(y,z)+d(y,z)+d(y,z)d(x,y)}{1+d(x,y)+d(y,z)+d(x,y)d(y,z)}\nonumber
+\\d(x,z)+d(x,y)d(x,z)+d(y,z) +& & d(x,y)+d(x,y)d(y,z)+d(y,z)+d(y,z)d(x,y)+\nonumber
+\\d(x,z)+d(x,y)d(y,z)d(x,z)&\leq&d(x,y)d(x,z)+2d(x,y)d(y,z)d(x,z)+d(y,z)d(x,z)\nonumber
+\\ & &d(x,y)+d(x,y)d(y,z)+ \nonumber
+\\d(x,z)&\leq&d(y,z)+d(y,z)d(x,y)+d(x,y)d(y,z)d(x,z)\nonumber
+\end{eqnarray}
+
+Lo ultimo es cierto por la desigualdad triangular de $ d $ y porque los demás términos en la derecha son mayores o iguales a 0. 
+
+Ahora si tomamos $ D(x,y) = |x-y|  $ (la métrica usual de $ \mathbb{R} $), entonces podemos reescribir $ D $ como
+
+\begin{equation}
+D(x,y)=\sum_{i \in \omega} \frac{d^*(x_i,y_i)}{2^{i}} \nonumber
+\end{equation}
+
+Además obsérvese que $ d*(x,y)<1 $ puesto que $d(x,y)<1+d(x,y)$.
+
+Por otra parte tenemos que la sumatoria $ \sum {(1/2)^i} $ converge pues esta es la serie geométrica evaluada en $ 1/2<1 $. De hecho sabemos que
+
+\begin{equation}
+\sum_{i \in \omega} = \frac{1}{2^i}=\frac{1}{1-\frac{1}{2}}=2.\nonumber 
+\end{equation}
+
+Entonces, podemos probar que cualquier sumatoria $ \sum d^*(x_i,y_i)/2^i) $ converge por test de la convergencia.
+
+Esto porque para todo término tenemos que $ d^*(x_i,y_i)/2^i<1/2^i $, luego como $ \sum 1/2^i$ converge, $ \sum d^*(x_i,y_i)/2^i $ también. 
+\end{proof}
+
+Ahora vamos a demostrar que $ D $ es una métrica.
+
+\begin{equation}
+D(x,x)= \sum_{i \in \omega} \frac{d^*(x,x)}{2^i}=\sum_{i \in \omega}\frac{0}{2^i}=0 \nonumber
+\end{equation}
+
+También vemos que si $D(x,y)=0$ entonces $ \forall i \in \omega $ $d^*(x_i,y_i)=0$ por lo que $x_i=y_i$. Concluimos que $ x = y $.
+
+\begin{equation}
+D(x,y)= \sum_{i \in \omega} \frac{d^*(x_i,y_i)}{2^i} = \sum_{i \in \omega} \frac{d^*(y_i,x_i)}{2^i} = D(y,x)\nonumber
+\end{equation}
+
+Resta por demostrar la desigualdad triangular. Para series de términos no negativos tenemos lo siguiente:
+
+\begin{equation}
+D(x,y)+D(y,z)=\sum_{i \in \omega} \frac{d^*(x_i,y_i)}{2^i} + \sum_{i \in \omega} \frac{d^*(y_i,z_i)}{2^i}= \sum_{i \in \omega} \Big(\frac{d^*(x_i,y_i)}{2^i}+\frac{d^*(y_i,z_i)}{2^i}\Big) \nonumber
+\end{equation}
+
+Por la desigualdad triangular de $ d^* $ tenemos que $ d^*(x_i,z_i)/2^i \leq d^*(x_i,y_i)/2^i+d^*(y_i,z_i)/2^i $. Por lo tanto concluimos que
+
+\begin{equation}
+D(x,z)=\sum_{i \in \omega} \frac{d^*(x_i,z_i)}{2^i} \leq \sum_{i \in \omega} \Big(\frac{d^*(x_i,y_i)}{2^i}+\frac{d^*(y_i,z_i)}{2^i}\Big) \nonumber
+\end{equation}
+Por lo que la desigualdad triangular se cumple.
+
+Ahora debemos demostrar que la topología que genera esta métrica es igual a la topología producto de $ \mathbb{R}^\omega $.
+
+Primero nótese que 
+\begin{equation}
+\sum_{i =n}^{\infty} \frac{1}{2^i} = \frac{1}{1-\frac{1}{2}}-\frac{1-\frac{1}{2}^n}{1-\frac{1}{2}}= 2-2*(1-(1/2)^n)=2(1/2)^n=(1/2)^{n-1} \nonumber
+\end{equation}
+
+Como una consecuencia de la propiedad arquimedeana para cualquer $ \epsilon > 0 $ se puede encontrar un $ N \in \omega $ tal que $ 1/2^{N-1} < \epsilon$.
+
+Entonces sea $ B $ una bola de radio $ \epsilon $ alrededor de un punto $ x $ y tomemos un punto $ y \in B $. Sabemos que $ D(x,y)<\epsilon $ luego sea $ \delta = \epsilon-D(x,y)>0 $ y podemos tomar un $N \in \omega$ tal que $ (1/2)^{N-1} <\delta/2$. Entonces puedo tomar como $ V_i $ el abierto $ B_{\epsilon_i}(y_i)$ con la métrica $ d^* $ donde  $\epsilon_i/2^i<\delta/2N))$, si $ i \leq N $. De lo contrario podemos tomar a $ V_i $ como $ \mathbb{R} $. Luego el conjunto $ S = \prod_{i \in \omega} V_i$ es tal que $ b \in S \subseteq B $. 
+
+Tome un elemento $ s \in S $. Tenemos que $ D(s,y) = \sum_{i \in \omega}d^*(s_i,y_i)/2^i$. Ahora podemos separar esta suma como
+\begin{equation}
+D(s,y) = \sum_{i=0}^{N-1}d^*(s_i,y_i)/2^i +  \sum_{i=N}^{\infty}d^*(s_i,y_i)/2^i \nonumber
+\end{equation}
+
+Por una parte tenemos que $ d^*(s_i,y_i)/2^i < \epsilon_i/2^i<\delta/2N$. Luego,
+
+\begin{equation}
+\sum_{i=0}^{N-1}\frac{d^*(s_i,y_i)}{2^i} < \sum_{i=0}^{N-1} \frac{\delta}{2N} = \frac{N*\delta}{2N} = \frac{\delta}{2}. \nonumber
+\end{equation}
+
+Por la otra tenemos que
+\begin{equation}
+\sum_{i=N}^{\infty}d^*(s_i,y_i)/2^i < \sum_{i=N}^{\infty}\frac{1}{2^i}=\frac{1}{2}^{N-1}<\delta/2. \nonumber
+\end{equation}
+
+Por lo tanto, tenemos que $ D(s,y)<delta $.
+
+Finalmente por desigualdad triangular concluimos que
+
+\begin{equation}
+D(s,x) \leq D(s,y)+D(x,y) < \delta+D(x,y)=\epsilon-D(x,y)+D(x,y) =\epsilon\nonumber
+\end{equation}
+
+
+
+
+\end{enumerate}
+\end{document}
