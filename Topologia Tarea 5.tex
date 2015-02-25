@@ -1,0 +1,130 @@
+\documentclass[letter,twoside,12pt]{article}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{fullpage}
+\usepackage{latexsym}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+\title{Topología: Tarea \#5}
+\newtheorem{lemma}{Lema}
+\author{Jonathan Andrés Niño Cortés}
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item Considere la relación de equivalencia sobre $ \mathbb{R} $ definida por
+\begin{equation}
+x \sim y \Leftrightarrow x = y \vee x,y \in \mathbb{Z}. \nonumber
+\end{equation}
+Muestre que $ \mathbb{R}/\sim $ es de Fréchet-Urysohn pero no es primero contable.
+
+\begin{proof}
+Esta relación de equivalencia induce una función cociente $f: \mathbb{R} \to \mathbb{R}/\sim$ tal que envia un elemento $ x \in  \mathbb{R} $ a su respectiva clase de equivalencia $x_\sim$. Y sabemos que $X $ es abierto en la topología de $\mathbb{R}/\sim$ si y solo si $ f^{-1}(X) $ es abierto en $\mathbb{R}$. De esta definición, se deduce que $f$ es continua. 
+
+Primero demostremos que $ \mathbb{R}/\sim $ es de Fréchet-Urysohn.
+
+Tome cualquier conjunto $A$ de $ \mathbb{R}/\sim $.
+Primero vamos a demostrar que $ f(\overline{f^{-1}(A)})=\overline{A} $. La contenencia $\subseteq$ esta dada porque $f$ es continua, luego $f(\overline{f^{-1}(A)}) \subseteq \overline{f(f^{-1}(A)}=\overline{A}$. Para la otra contenencia tome un elemento $x_\sim \in \overline{A}$, luego todo vecindario de $x_\sim$ interseca a $A$. Si $x \not = 0_\sim$ entonces $ f^{-1}(x_\sim)=\{x\} $ y tenemos que todo vecindario $U$ de $x$ que no contenga a níngun entero es saturado y por lo tanto $f(U)$ es un vecindario de $x_\sim$ de donde concluimos que interseca a $A$ y por lo tanto $U$ debe intersecar a $f^{-1}(A)$. Si $U$ contiene a un elemento de $\mathbb{Z}$, siempre se puede tomar una vecindad $V$ dentro de esta vencindad que no contenga níngun punto de $ \mathbb{Z} $. Por ejemplo, podemos tomar una bola centrada en $ x $ tal que su radio sea menor a min($ \lceil x \rceil -x, x-\lfloor x \rfloor$) y que este contenida en $U$ y por lo anterior $V \cap f^{-1}(A) \not = \emptyset$ y por lo tanto $U \cap f^{-1}(A) \not = \emptyset$.
+
+Ahora, para el caso en que $x_\sim = 0_\sim$, tomemos $f^{-1}(\{0_\sim\})= \mathbb{Z}$.  Sea $ U $ una vecindad de $ 0_\sim $. Entonces la preimagen, $f^{-1}(U)$ es un conjunto abierto en $\mathbb{R}$ tal que contiene a $\mathbb{Z}$ y además tenemos que $ f^{-1}(A)\cap f^{-1}(U) \not = \emptyset $. Entonces debe existir un $ p \in \mathbb{Z} $ tal que $\mathbb{Z}$ esta en la clausura de $ f^{-1}(A) $. Supongamos por contradicción que este no es el caso. Luego por cada entero $z$ existe un vecindario $V_z  $ tal que $f^{-1}(A) \cap V_z  = \emptyset$. Si tomamos $V = \bigcup_{z \in \mathbb{Z}} V_z$, vemos que es un abierto saturado pues se puede ver como la unión de la clase de equivalencia de los enteros y las clases de equivalencia de los demás puntos que son sus respectivos singletons. Luego $f(V)$ sería una vecindad de $0_\sim$ que no interseca a $A$ contradiciendo el hecho que $ 0_\sim \in \overline{A}$. Entonces el dicho elemento $p$ existe y por lo tanto $f(p)=0_\sim \in f(\overline{f^{-1}(A)})$.
+
+Por lo demostrado anteriormente, para cualquier $x \in \overline{A} $ existe un $y \in \overline{f^{-1}(A)}$ tal que $f(y)=x$. Por otro lado $\mathbb{R}$ es metrizable y por lo tanto es de Fréchet-Urysohn. Entonces existe una sucesión $ (a_n) \subseteq f^{-1}(A)$ que converge a $y$. Finalmente, por el Teorema 21.3 del Munkres la sucesión $f(a_n)  \subseteq A $ converge a $f(y)=x$. Con esto concluimos que $\mathbb{R}/\sim$ es de Fréchet-Urysohn.
+
+Ahora para demostrar que no es primero contable vamos a suponer que este es el caso y vamos a utilizar un argumento de diagonalización para llegar a una contradicción.
+
+Entonces suponga por contradicción que $\mathbb{R}/\sim$ es primero contable. En particular para $ 0_\sim $ existe una familia contable de vecindades $ \mathcal{B} $ tal que para cualquier vecindario $U$ de $ 0_\sim $, existe un $ B \in \mathcal{B}$ tal que $ B \subseteq U $. Sea $ (B_n)_{n \in \mathbb{N}} $ una enumeración de $\mathcal{B}$. Además, para cada $B_n \in \mathcal{B}$ se cumple que $\mathbb{Z}\subseteq f^{-1}(B_n)$, y además que $ f^{-1}(B_n) $ es abierto. Luego para cada $z \in \mathbb{Z}$ existe una bola abierta (con la métrica usual de $ \mathbb{R} $) de radio menor a 1/2 tal que esta contenida en $f^{-1}(B)$. $\mathbb{Z}$ también es enumerable, luego existe una enumeración $(B_{\epsilon_{nm}}(z_m))_{m \in \mathbb{N}}$ de las bolas mencionadas anteriormente.
+\begin{center}
+\begin{tabular}{lcccc}
+ $ B_1: $& $ B_{\epsilon_{11}}(z_1) $& $ B_{\epsilon_{12}}(z_2) $& $ B_{\epsilon_{13}}(z_3) $ & $ \cdots $ \\
+ $ B_2: $& $ B_{\epsilon_{21}}(z_1) $& $ B_{\epsilon_{22}}(z_2) $& $ B_{\epsilon_{23}}(z_3) $ & $ \cdots $ \\
+ $ B_3: $& $ B_{\epsilon_{31}}(z_1) $& $ B_{\epsilon_{32}}(z_2) $& $ B_{\epsilon_{33}}(z_3) $ & $ \cdots $ \\
+ $$ \vdots $$& $ \vdots $ & $ \vdots $ & $ \vdots $ & $ \ddots $ \\
+\end{tabular}
+\end{center}
+
+Ahora defina el conjunto $V$ como \begin{equation}
+V = \bigcup_{n \in \mathbb{N}}B_{\epsilon_{nn}/2}(z_n) \nonumber
+\end{equation}
+
+Claramente $ f(V) $ es un vecindario de $0_\sim$ pues es la imagen de un conjunto saturado abierto que contiene a todos los enteros. Vamos a demostrar que ningún $B_n $ es subconjunto de $ f(V)$. Tome cualquier $B_n$, entonces $z_n+3/4\epsilon_{nn}$ pertenece a $f^{-1}(B_n)$ pero no pertenece a $V$, luego $ B_n \not \subseteq f(V) $. Llegamos a una contradicción con el hecho que debía existir un $B \in \mathcal{B}$ que estuviera contenido en $f(V)$. Concluimos que no puede existir una familia contable con esta propiedad y por lo tanto $ \mathbb{R}/\sim $ no es primero contable. 
+\end{proof}
+
+\item Suponga que $ U $ es un subespacio abierto de $ \mathbb{R}^n $. Pruebe que $ U $ es conexo si y sólo si $ U $ es conexo por caminos. Muestre que si $ n = 1 $, la hipótesis de que $ U $ es abierto se puede omitir.
+
+\begin{proof}
+Un lado de la equivalencia esta dado en el Munkres. Suponga que $ U $ es conexo por caminos y tome $ A \cup B $ una separación de $U$. Sea $ f:[a,b] \to U $ cualquier camino en $U$. Por un teorema tenemos que $ f([a,b]) $ es conexo, pues es la imagen continua de un conjunto conexo. Pero entonces tenemos que $ f([a,b]) \subseteq A $ o $ f([a,b]) \subseteq B $. Concluimos que no puede haber ningun camino que conecte a un punto de $A$ con un punto de $B$, lo que contradice el hecho que $ U $ es conexo por caminos.
+
+Para el converso primero vamos a demostrar los siguientes lemas
+\begin{lemma}
+Sean $x,y,z \in X$ un espacio topológico. Si $x,y$ están conectados por un camino y $ y,z $ también, entonces $ x,z $ están conectados por un camino.
+\begin{proof}
+Sea $f:[a,b]\to X$ un camino de $x$ a $y$ y $g:[b,c]\to X$ un camino de $y$ a $z$. $[a,b] \cap [b,c]=\{b\}$ y $ f(b)=g(b)=y $. Además las dos funciones son continuas por lo que podemos usar el lema de pegamiento para contruir la función $ h:[a,c]\to X $ tal que $h(w)=f(w)$ si $ w \in [a,b] $ y $h(w)=g(w)$ si $ w \in [b,c] $ y esta función es continua por lo cual es un camino entre $x$ y $z$. 
+\end{proof}
+\end{lemma}
+
+\begin{lemma}
+Sean $x,y \in X$ un espacio topológico. Si hay un camino de $x$ a $y$ entonces hay un camino de $y $ a $ x $.
+\begin{proof}
+Sea $f:[a,b]\to X$ un camino de $x$ a $y$. Si componemos $f$ con la función $g:[a,b] \to [a,b]$ tal que $g(c)=a+b-c$. que es continua obtenemos la función $h = f \circ g : [a,b] \to X$ tal que es continua y $h(a)= f \circ g(a)=f(a+b-a)=f(b)=y$ y $h(b)= f \circ g(b)=f(a+b-b)=f(a)=x$. Por lo tanto $h$ es un camino de $y$ a $x$. 
+\end{proof}
+\end{lemma}
+
+Ahora, tomese $x \in U$ y defina $C_x$ como el conjunto de los puntos $ y $ en $U$ que estan conectados con $x$ por medio de un camino. Primero observemos que $ x \in C_x $ pues podemos tomar como camino la función constante $f(c)=x$, por lo cual $ C_x $ no es vacío. Ahora vamos a probar que $C_x$ es abierto. Tome cualquier elemento $y \in C_x$ entonces existe un camino $f$ de $x$ a $y$. Pero además, como $U$ es abierto, existe una bola abierta centrada en $y$ y contenida en $U$. En el Munkres mencionan que las bolas abiertas (y cerradas) son conexas por caminos. Luego hay un camino entre $y$ y cualquier otro punto dentro de la bola. Entonces, por el Lema 1 hay un camino entre $x$ y cualquier punto en la bola por lo que la bola esta contenida en $ C_x $ y por lo tanto $y$ es punto interior.
+
+Pero también tenemos que $ C_x $ es cerrado. Tome cualquier punto $ y $ que no este contenido en $C_x$. Si suponemos que existe una bola de $y$ contenida en $U$ que interseca a $C_x$ entonces podemos tomar un elemento $z $ en la intersección y tendriamos que hay un camino de $x$ a $z$ y de $z$ a $y$ por lo que también habría un camino de $x$ a $y$. Esto contradice el hecho que $y \not \in C_x$. Por lo tanto, cualquier bola abierta contenida en $ U $ que contenga a $y$ esta contenida en $C_x^C$. Concluimos que $ C_x $ esta cerrado. Pero $ U $ es conexo por lo que los únicos conjuntos que pueden ser cerrado y abiertos son el vacío y $ U $. Pero $ C_x $ no es vacío, por lo cual concluimos que $ C_x = U $. Finalmente llegamos a que $ U $ es conexo por caminos pues para cualquier par de puntos $ y,z \in U $ existe un camino de $ y $ a $ x $ (utilizando el Lema 2) y un camino de $ x $ a $ z $ por lo que hay un camino de $y$ a $z$ (utilizando el Lema 1). 
+
+Para el caso cuando $ n = 1 $, entonces $U$ sería un subespacio de $ \mathbb{R} $ que es un continuo lineal. Vamos a demostrar que la hipotesis de abierto no es necesaria para demostrar que $ U $ es conexo por caminos. Sea $U$ un subconjunto conexo de $ \mathbb{R} $ y tome $ a,b  \in U$. Si $a = b$ entonces el camino constante los conecta. Supongamos sin pérdida de generalidad que $ a<b $, pues si hay un camino de $ a $ a $b$ entonces por el Lema 2 hay un camino de $ b $ a $ a $. Si tomamos cualquier elemento $ c  $ tal que $ a< c <b $ entonces $ c \in U$. Si esto no fuera así entonces $ (-\infty,c) \cap U $ y $(c,\infty) \cap U $ sería una separación de $U$, y $ U $ no sería conexo. Entonces si tomamos la función identidad de $ [a,b] $ esta sería un camino de $ a $ a $b  $. Concluimos que $ U $ es conexo por caminos.   
+ \end{proof}
+
+\item Sea $ p : X \to Y $ una aplicación cociente. Demuestre que si $ Y $ y los conjuntos de la forma $ p^{-1}(\{y\}) $ son conexos, entonces $ X $ también es conexo.
+
+\begin{proof}
+Suponga por contradicción que $X$ no es conexo y tome $A \cup B$ una separación de $X$. Entonces para todo $ y \in Y $ se cumple que $p^{-1}(y) \subseteq A$ o $p^{-1}(y) \subseteq B$ por la suposición de que estos conjuntos son conexos. Vemos que $A$ y $B$ son conjuntos saturados abiertos. Por lo tanto $p(A)$ y $p(B)$ serían una separación de $Y$. Esto porque $p(A)$ y $p(B)$ son abiertos, $ p(A)\cup p(B)=p(A\cup B)=p(X)=Y $ y $ p(A) \cap p(B)= \emptyset $ porque si $y \in p(A) \cap p(B)$, entonces $p^{-1}(y) \subseteq A $ porque $A$ es saturado y $p^{-1}(y) \subseteq B $ porque $B$ es saturado, y esto contradice el hecho que $A \cap B = \emptyset$.
+
+Por lo tanto llegamos a una contradicción con la conexidad de $ Y $. Entonces $X$ debe ser conexo.
+
+
+\end{proof}
+
+\item Sea $ (X,d) $ un espacio métrico. Para cada $ p \in X $ y $ \epsilon \in \mathbb{R}^+ $, definimos $ B_\epsilon(p) = \{x \in X:d(p,x)<\epsilon \}$ y $ C_\epsilon(p)= \{x \in X:d(p,x)\leq \epsilon\} $. Para cada afirmación diga si es verdadera o falsa.
+
+\begin{enumerate}[label=(\alph*)]
+\item Para todo $ p \in X $ y todo $ \epsilon \in \mathbb{R}^+ $, $ B_{\epsilon}(p) $ es conexo.
+\begin{proof}
+Falso. Tome $ X = \mathbb{Z} $ con la métrica heredada como subespacio de $ \mathbb{R} $ que genera la topología discreta y tome $B_2(0)$. Entonces $B_2(0)=\{-1,0,1\}$ y claramente $B_2(0)$ es disconexa pues $ \{0\} $ sería un clopen diferente de $X$ o vacío contenido en la topología de subespacio de $B_2(0)$.
+\end{proof}
+\item Si $ B_\epsilon(p) $ es conexo entonces $ C_\epsilon(p) $ es conexo.
+
+\begin{proof}
+Falso. Tome de nuevo $X = \mathbb{Z}$ con la métrica heredada como subespacio de $ \mathbb{R} $ y tome $ B_1(0) $. Vemos que $ B_1(0) = \{0\}$ es conexo porque todo singleton es conexo. Pero $ C_1(0) = \{-1,0,1\}$ que como vimos anteriormente no es conexo.  
+\end{proof}
+
+\item Si $ C_\epsilon(p) $ es conexo entonces $ B_\epsilon(p) $ es conexo.
+
+\begin{proof}
+Falso. Tome $X=S'-\{(1,0)\}$ el círculo unitario de $X$ sin el punto $ \{(1,0)\}$ como subespacio de $ \mathbb{R}^2 $ y con la métrica heredada del mismo pero acotada por $ \sqrt{2} $ (i.e $ \overline{d}(x,y)=\text{min}(d(x,y),\sqrt{2}) $ que se demostro en una tarea anterior que es una métrica y que genera la misma topología que $ d $). Entonces tome la bola $ B_{\sqrt{2}}((\sqrt{2}/2,\sqrt{2}/2)) $. Se puede ver que esta bola es disconexa, pues existe una separación, a saber el arco abierto entre $ (-\sqrt{2}/2,\sqrt{2}/2) $ y $(1,0)$ y el arco abierto de $ (1,0) $ a $ (\sqrt{2}/2,-\sqrt{2}/2) $. Pero la bola cerrada $ C_{\sqrt{2}}((\sqrt{2},\sqrt{2}))= X $ por nuestra métrica. Y $X$ si es conexo pues la función $ f:(0,1)\to X $ tal que $ f(t)=(\cos(t),\sin(t)) $ es una función continua y es sobreyectiva. Por lo tanto, como (0,1) es conexo $X$ también lo es.
+\end{proof}
+
+\item Si $ B_\epsilon(p) $ y $ B_\delta(q) $ son conexos entonces $ B_\epsilon(p) \cap B_\delta(q) $ es conexo.
+\begin{proof}
+Falso. Tome $ X= S' $ con la métrica heredada como subespacio de $ \mathbb{R}^2 $ y tome las bolas $ B_{\sqrt{3}}((1,0)) $ y $ B_{\sqrt{3}}((-1,0)) $. 
+
+Además recuerde que la función $ f:[0,2\pi]\to X $ tal que $ f(t)=(\cos(t),\sin(t)) $ es una aplicación cociente. De igual manera la función $ g:[-pi,pi]\to X $ tal que $ g(t)=(\cos(t),\sin(t)) $ es otra aplicación cociente.
+
+Entonces la bola $B_{\sqrt{3}}((-1,0)$ sería el arco en sentido antihorario desde $ (1/2,\sqrt{3}/2) $ hasta $ (1/2,-\sqrt{3}/2) $ y la bola $B_{\sqrt{3}}((1,0)$ sería el arco en sentido antihorario desde $ (-1/2,-\sqrt{3}/2) $ hasta $ (-1/2,\sqrt{3}/2) $. Las bola centrada en -1 es conexa pues su preimagen sobre la función $f$ sería $ (\pi/3,5\pi/3) $ que es conexo. La bola centrada en 1 también también es conexa pues su preimagen por $ g $ es el intervalo abierto $ (-2\pi/3,2\pi/3) $. Pero la intersección entre estas bolas no es conexa. Sería la unión de dos arcos conexos disyuntos. Por un lado el arco de $ (1/2,\sqrt{3}/2) $ a $ (-1/2,\sqrt{3}/2) $ y por el otro el arco de $ (-1/2,-\sqrt{3}/2) $ a $ (1/2,-\sqrt{3}/2) $ y claramente no son conexos pues los dos arcos forman una separación de la intersección. 
+\end{proof}
+
+
+\item Si $B_\epsilon(p)$ y $B_\epsilon(q)$ son conexos y $ d(p,q) <2\epsilon$ entonces $ B_\epsilon(p) \cup B_\epsilon(q) $ es conexo.
+
+\begin{proof}
+Falso. Tome $ X = \mathbb{Z}-\{-2,0,2\} $ y tome las bolas $B_2(-1)$ y $B_2(1)$. Nótese que $ d(-1,1)=2<2\epsilon = 4 $. Además, $B_2(-1)= \{-1\}$ y $B_2(1)= \{1\}$ son conexos pues son singletons. Pero $ B_2(-1) \cup B_2(1) = \{-1,1\}$ que no es conexo porque, por ejemplo, el singletón $ \{-1\} $ sería un clopen no trivial de $ B_2(-1) \cup B_2(1) $.
+\end{proof}
+\end{enumerate}
+\end{enumerate}
+\end{document}
