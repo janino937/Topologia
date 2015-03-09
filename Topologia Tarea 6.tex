@@ -1,0 +1,185 @@
+\documentclass[letter,twoside,12pt]{article}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsthm}
+\usepackage{fullpage}
+\usepackage{latexsym}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+\title{Topología: Tarea \#6}
+\newtheorem{theo}{Teorema}
+\newtheorem{lemma}[theo]{Lema}
+\newtheorem*{defi}{Definición}
+\author{Jonathan Andrés Niño Cortés}
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+\item Supoga que $ (X , \tau) $ es un espacio de Hausdorff sin puntos aislados. Muestre (usando el Lema de Zorn) que existe una topología $ \tau^* $ sobre $ X $ tal que
+
+\begin{enumerate}
+\item $ \tau \subseteq \tau^* $,
+\item $ (X, \tau^*) $ es de Hausdorff sin puntos aislados, y
+\item para toda topología $ \tau' \supsetneq \tau* $ sobre $ X $, el espacio $ (X,\tau') $ tiene puntos aislados. 
+\end{enumerate}
+\begin{proof}
+Para demostrar esto vamos a utilizar el Lema de Zorn, utilizando como orden parcial $ "\subset" $ la contenencia entre topologías.
+
+Sea $ P $ el conjunto de las topologías que contienen a $ \tau $ y que no contienen puntos aislados. En primer lugar $ P $ es no vacío pues $ \tau \in P$. 
+
+Ahora vamos a probar que cualquier cadena esta acotada. Sea $ T $ una cadena de topologías de $ P $, es decir, un subconjunto que es un orden lineal con respecto al orden parcial $ \subset $. Entonces tome $ \mathcal{B} = \bigcup_{\tau' \in T} \tau' $. Esta no es una cota pues no podemos demostrar que sea una topología, pero si es la base para la topología cota.
+
+Para la primera condición de base tenemos que $ X \in \mathcal{B} $ pues $X$ esta en cualquiera de las topologías de la unión. Y para la segunda tebemos que $ \mathcal{B} $ es cerrado bajo  intersecciones finitas. Solo basta probarlo para dos intersecciones y el caso general se sigue por inducción.  Tome $ A , B \in \mathcal{B} $. Deben existir $ \tau_1 $ y $ \tau_2 \in T $ tales que $A \in \tau_1 $ y $ B \in \tau_2 $. Suponiendo sin pérdida de generalidad que $ \tau_1 \subseteq \tau_2 $ tendriamos que $ A \in \tau_2 $, por lo que $ A \cap B \in \tau_2 \subseteq \mathcal{B} $.
+
+Ahora veamos que efectivamente la topología $ \tau^{\circ} $ generada por $ \mathcal{B} $ es una cota superior para $ T $. En primer lugar para cualquier $ \tau' \in T $ tenemos que $ \tau' \in B \subseteq \tau^{\circ} $. Para verificar que $ \tau^{\circ} \in P $, notese primero que para cualquier $ \tau' \in T, \tau \subseteq \tau' \subseteq \mathbb{B} \subseteq \tau^{\circ}$.
+
+Además, $ \tau^{\circ} $ no tiene puntos aislados, porque si los tuviera entonces existiria algun $ x \in X $ tal que $ \{x\} \in \tau^\circ $, pero entonces como es la generada por $ \mathcal{B} $ debe existir algún $ B \in \mathcal{B} $ tal que $ x \in B \subseteq \mathcal{B} $, pero entonces $ B = \{x\}$. Luego existiria algún $ \tau \in T $ tal que $ \{x\} \in \tau $. Llegamos a una contradicción pues $ \tau \in P $ y por lo tanto no puede tener puntos aislados.
+
+Por lo tanto, las condiciones del Lema de Zorn se cumplen y al aplicarlo obtenemos la existencia de una topología $ \tau^* $ máximal. Esta topología cumple las condiciones requeridas. Las primeras dos porque $ \tau^* \in P $ y la tercera porque es máximal. Faltaria demostrar que $ \tau^* $ es de Hausdorff pero esto se sigue pues cualquier topología que contenga a una topología de Hausdorff es de Hausdorff.
+\end{proof}
+
+\item Suponga que $ \mathcal{A} \subseteq \mathcal{P}(\mathbb{N}) $ tiene la \textit{propiedad fuerte de intersecciones finitas PFIF} (i.e. para cualquier $ \mathcal{A}_0 \subseteq \mathcal{A} $ finito, el conjunto $ \bigcap \mathcal{A}_0 $ es infinito). Muestre (usando el Lema de Zorn) que existe un ultrafiltro no principal $ \mathcal{U} $ sobre $ \mathbb{N} $ tal que $ \mathcal{A} \subseteq \mathcal{U} $. 
+
+\begin{proof}
+
+Primero vamos a realizar algunas definiciones asociadas a filtros y vamos a demostrar algunos teoremas útiles para esta demostración.
+
+\begin{defi}
+Una colección $ F \subseteq \mathcal{P}(\mathbb{N}) $ se llama un filtro (propio) de $ \mathbb{N} $ si cumple las siguientes condiciones
+\begin{enumerate}
+\item $ \emptyset \not \in F $.
+\item Si $ A,B \in F $ entonces $ A \cap B \in F $.
+\item Si $ A \in F $ y $ A \subseteq B $ entonces $ B \in F $.
+\end{enumerate}  
+\end{defi}
+Obsérvese que solamente falta la condición que para todo $ A \subseteq \mathbb{N} $, $ A $ o $ \mathbb{N} \backslash A \in F$ para que $ F $ sea un ultrafiltro.
+
+\begin{defi}
+Un filtro $ F $ se llama principal si existe algún $ x \in \mathbb{N} $ tal que $ \{ x\} \in F $. De lo contrario se llama no principal.
+\end{defi}
+
+\begin{defi}
+Una colección $ \mathcal{B} \subseteq \mathcal{P}(\mathbb{N}) $ se llama una base de filtro si es cerrada bajo intersecciones finitas y el vacío no esta contenido en $ \mathcal{B} $.
+\end{defi}
+
+\begin{theo}
+Sea $ \mathcal{B} $ una base de filtro. La colección $ F = \{X \subseteq \mathbb{N}\,|\, B \subseteq X \text{ para algún } B \in \mathcal{B} \}$ es un filtro que contiene a $ \mathcal{B} $. El filtro $ F $ se llama el filtro generado por la base $ \mathcal{B} $. 
+\begin{proof}
+El hecho que $ \mathcal{B} \subseteq F $ es trivial y se sigue del hecho de que para cualquier $ B \in \mathcal{B} $, $ B \subseteq B $. Si vacío perteneciera a $ F $ entonces vacío pertenecería a $ \mathcal {B} $ lo cual es una contradicción. Ahora si $ X,Y \in F $ entonces existen $ A,B \in \mathcal{B} $ tales que $ A \subseteq X $ y $ B \subseteq Y $. Como $ \mathcal{B} $ es cerrado bajo intersecciones finitas tenemos que $ A \cap B \in \mathcal{B}$ y además tenemos que $ A \cap B \subseteq X \cap Y $ por lo que $ X \cap Y \in F$. Por ultimo, si tomamos algún $ Z \in F $ tal que $ X \subseteq Z $ entonces $ A \subseteq X \subseteq Z $, por lo que $ Z \in F $. Por lo tanto, $ F $ es un filtro.
+\end{proof}
+\end{theo}
+\begin{defi}
+Una colección $ \mathcal{S} \subseteq \mathcal{P}(\mathbb{N})$ se llama subbase de filtro si para cualquier $ A,B \in \mathcal{S} $, $ A \cap B \not = \emptyset$.
+\end{defi}
+
+\begin{theo}
+Sea $ \mathcal{S} $ una subbase de filtro . La colección $ B = \{\bigcap_{S \in N} S\}  $ donde los $ N \subseteq \mathcal{S} $ son finitos, es una base de filtro. El filtro generado por esta base se llama el filtro generado por la subbase $ \mathcal{S} $ y es tal que contiene a $ \mathcal{S} $. 
+\begin{proof}
+Que $ B $ sea cerrado bajo intersecciones finitas se sigue por construcción. Además se puede probar mediante inducción sobre el tamaño de $ N $ que $ \bigcap_{S \in N} S \not = \emptyset $. Por último $ \mathcal{S} \subseteq B$ pues para cualquier conjunto $ X \in B $ tenemos que $ X = \bigcap_{S \in \{X\}} S $.
+\end{proof}
+\end{theo}
+
+El siguiente teorema ilustra la relación entre los conceptos de filtro y ultrafiltro.
+
+\begin{theo}
+Un filtro es un ultrafiltro si y sólo si es máximal.
+\begin{proof}
+Primero sea $ F $ un ultrafiltro. Entonces se cumplen todos las propiedades de filtro y solo resta ver que es máximal. En efecto si suponemos que existe otro filtro $ G $ tal que $ F \subsetneq G $ entonces existiría algun $ A \in G $ tal que $ A \not \in F $, pero por la ultima condición de ultrafiltro tendriamos que $ X \backslash A $ pertenecería a $ F $ y por lo tanto a $ G $. Luego $ A \cap X \backslash A = \emptyset \in G $, una contradicción. Por lo tanto $ F $ es máximal.
+
+Para el converso vamos a demostrar la contrarecíproca. Suponga que $ F $ no es un ultrafiltro, es decir, que existe un $ A \subseteq  \mathbb{N}$ tal que $ A \not \in F $ y $ \mathbb{N} \backslash A \not \in F $. Ahora se debe cumplir que $ \{A\} \cup F$ o $ \{\mathbb{N} \backslash A\}\cup F $ forman una subbase de filtro. Esto porque si existiera $ X , Y \in F $ tales que $ X \cap A = \emptyset $ y $ Y \cap (\mathbb{N} \backslash A) = \emptyset $, entonces tendriamos que $ X \subseteq (\mathbb{N} \backslash A) $ y $ Y \subseteq A $, luego $ X \cap Y = \emptyset $ lo que contradeciría el hecho que $ F $ es un filtro. Entonces si suponemos sin pérdida de generalidad que $ \{A\} \cup F$ es una subbase, el filtro $ F' $ generado por esta base sería tal que $ F \subsetneq F' $ pues contendría a $ A $. Por lo tanto $ F $ no sería máximal.
+\end{proof}
+\end{theo}
+
+Por ultimo vamos a demostrar algunos teoremas asociados a la propiedad PFIF.
+
+\begin{theo}
+Si $ \mathcal{S} $ es una subbase que además es PFIF, entonces el filtro generado por $ \mathcal{S} $ también es PFIF.
+
+\begin{proof}
+En primer lugar vemos que una subbase PFIF genera una base $ \mathcal{B} $ que también es PFIF y donde todos los elementos son conjuntos infinitos. Ahora si tomamos $ F $ el filtro generado por esta base y tomemos $ A_1,\cdots, A_n $ conjuntos en $ F $, entonces por cada $ B_i $ existe un $ B_i \in \mathcal{B}$ tal que $ B_i \subseteq A_i $. Entonces como $ \mathcal{B} $ es PFIF tenemos que $ \bigcap{i=0}^n B_i$ es un conjunto infinito. Luego como $\bigcap{i=0}^n B_i \subseteq \bigcap{i=0}^n A_i $, tenemos que este ultimo también es infinito por lo que $ F $ también tiene la propiedad de intersecciones finitas fuertes.
+\end{proof}
+\end{theo}
+
+\begin{lemma}
+Sea $ F $ un filtro PFIF máximal. Entonces $ F $ debe contener a todos los $ X \subseteq \mathbb{N} $ tales que $ \mathbb{N}\backslash X $ es finito.
+\begin{proof}
+Obsérvese que todo elemento en $ F $ debe ser infinito para que sea PFIF. Suponga que $ F $ no contiene un elemento con complemento finito $ X $. Entonces $ F \cup \{X\} $ es una base de filtro PFIF. Como $ F $ es cerrrado bajo intersecciones finitas solo necesitamos verificar que para cualquier $ A \in F $, $ A \cap X $ es infinito. Pero si denotamos $ N = \mathbb{N}\backslash X $ vemos que $ A \cap X = A \cap N^C = A \backslash N$. Luego como $ A $ es infinito y $ N $ es finito, tenemos que $ A \backslash N $ es infinito.
+\end{proof} 
+\end{lemma}
+
+\begin{theo}
+Sea $ F $ un filtro PFIF que es máximal en el conjunto de filtros PFIF. Entonces $ F $ es un ultrafiltro.
+\begin{proof}
+Por el Teorema 3, solo tenemos que demostrar que $ F $ es un filtro máximal. Si $ F' $ fuera un filtro tal que $ F \subsetneq F' $ entonces  $ F $ no puede ser PFIF y además existe $ A \in F' $ tal que $ A \not \in F $. Entonces debe existir $ B \in F $ tal que $ A \cap B $ es finito. Ahora como $ F' $ esta cerrado bajo intersecciónes finitas tenemos que $ A \cap B \in F' $, pero además como $ A \cap B $ es finito, su complemento debe pertenecer a $ F $ por el Lema 1. Luego $ \emptyset \in F' $ lo cual es una contradicción.  
+\end{proof}
+\end{theo}
+
+Teniendo esta base teórica vamos a utilizar el Lema de Zorn sobre los filtros con PFIF que contienen a $ \mathcal{A} $.
+
+Sea $ P $ el conjunto de estos filtros. $ P $ no es vacío, pues vemos que $ \mathcal{A} $ es una subbase PFIF, y por el Teorema 4 el filtro generado por $ \mathcal{A} $ también es PFIF.
+
+Ahora si tomamos $ T $ una cadena de elemento en $ P $ entonces tenemos que $M = \bigcup_{F \in T} F $ es una cota superior de esta cadena. En primer lugar, como el vacío no se encuentra en ninguno de los elementos de la cadena, no se encuentra en la unión. Por otra parte si $ A, B \in M $ entonces existe $ F_1 $ y $ F_2  \in T$ tales que $ A \in F_1 $ y $ B \in F_2 $ si suponemos sin pérdida de generalidad que $ F_1 \subseteq F_2 $ entonces $ A \in F_2 $. Por lo tanto como $ F_2 $ es un filtro tenemos que $ A \cap B \in F_2 \subseteq M$. Además si $C$ es tal que para algún elemento $ A \in M $ $ A \subseteq C $, entonces como $ A \in F $ para algún $ F \in T $ tenemos que $ C \in T $ por lo que $ C \in M $. Por lo tanto es un filtro. Además contiene  a $ \mathcal{A} $ porque todos los filtros de $ T $ lo contienen.
+
+Por ultimo, $ M $ es un PFIF también, porque si no lo fuera entonces existirian 2 (porque $ M $ es cerrado bajo intersecciones) elementos , $ A $ y $ B \in M$ tales que $ A \cap B $ es finito. Pero de nuevo existirian filtros $ F_1 $ y $ F_2 \in T$  tales que $ A \in F_1 $ y $ B \in F_2 $, si suponemos sin pérdida de generalidad que $ F_1 \subseteq F_2 $ entonces tendriamos que $A \in F_2$ por lo que $ F_2 $ no sería un PFIF. Contradicción. Por ultimo es cota porque para cualquier $ F \in T $, $ F \subseteq M $. Luego, podemos utilizar el Lema de Zorn para concluir que existe un filtro máximal $ \mathcal{U} $ tal que contiene A $ \mathcal{A} $ y es PFIF, pero por el Teorema 5 tenemos que $ \mathcal{U} $ sería un ultrafiltro PFIF, que por lo tanto es no principal, pues si lo fuera entonces $ \{x\} \in \mathcal{U}\ $ y no podría ser PFIF.
+\end{proof}
+
+\item Suponga que $ \mathcal{A} \subseteq \mathcal{P}(\mathbb{N}) $ es una familia \textit{independiente}, es decir, que para cualesquiera $ A_1, \cdots, A_n \in \mathcal{A} $ y cualesquiera $ \epsilon_1, \cdots, \epsilon_n \in \{1,-1\} $ se tiene que $ A_1^{\epsilon_1} \cap \cdots \cap A_n^{\epsilon_n} \not = \emptyset $, donde por convención $ A^1 = A $ y $ A^{-1}= \mathbb{N}\backslash A $. Muestre que existen al menos $ 2^{|\mathcal{A}|} $ ultrafiltros diferentes sobre $ \mathbb{N} $.
+\begin{proof}
+
+Vamos a demostrar que existe una inyección entre $ \mathcal{P}(\mathcal{A}) $ y los ultrafiltros de $ \mathbb{N} $. Entonces para cada $ X \subseteq \mathcal{A} $, tomese la colección $ \mathcal{S}_X = X \cup \{A^C|A \in \mathcal{A}\backslash X\}$. Por la condición de familia independiente esta colección es una subbase de filtro. Luego, podemos utilizar el lema de Zorn para probar que existe un ultrafiltro $ \mathcal{U}_X $ tal que $ \mathcal{S}_X \subseteq \mathcal{U}_X$. Esta demostración es similar a la demostración realizada en el punto anterior pero sin el supuesto de la propiedad PFIF. Solo que el ideal que lo contiene puede o no ser principal.
+
+Sea $ P $ el conjunto de los filtros que contienen a $ \mathcal{S}_X $. $ P $ no es vacío, pues por el Teorema 2 existe un filtro generado por $ \mathcal{S}_X $ que contiene a $ \mathcal{S}_X $.
+
+Ahora si tomamos $ T $ una cadena de elementos en $ P $ entonces tenemos que $M = \bigcup_{F \in T} F $ es una cota superior de esta cadena. En primer lugar, como el vacío no se encuentra en ninguno de los elementos de la cadena, no se encuentra en la unión. Por otra parte si $ A, B \in M $ entonces existe $ F_1 $ y $ F_2  \in T$ tales que $ A \in F_1 $ y $ B \in F_2 $ si suponemos sin pérdida de generalidad que $ F_1 \subseteq F_2 $ entonces $ A \in F_2 $. Por lo tanto como $ F_2 $ es un filtro tenemos que $ A \cap B \in F_2 \subseteq M$. Además si $C$ es tal que para algún elemento $ A \in M $ $ A \subseteq C $, entonces como $ A \in F $ para algún $ F \in T $ tenemos que $ C \in T $ por lo que $ C \in M $. Por lo tanto es un filtro. Además contiene  a $ \mathcal{S}_X $ porque todos los filtros de $ T $ lo contienen.
+
+Luego por el Lema de Zorn existe un filtro máximal $ \mathcal{U} $ que contiene a $ \mathcal{S}_X $ y por el Teorema 3 este filtro es un ultrafiltro.
+
+Para probar que la función que envia cada $ X $ a su respectivo $ \mathcal{U}_X $ es inyectiva tomese $ X, Y \subseteq \mathcal{A} $, tales que $ X \not = Y $ y supongamos sin pérdida de generalidad que existe $ A \in X $ tal que $ A \not \in Y $. Luego $ A \in \mathcal{S}_X \subseteq \mathcal{U}_X $, mientras que $ A^C \in \mathcal{S}_Y \subseteq \mathcal{U}_Y $. Por lo tanto $  \mathcal{U}_X $ y $ \mathcal{U}_Y $ deben ser diferentes. De lo contrario $ A $ y $ A^C \in \mathcal{U}_X $, por lo que $ A \cap A^C = \emptyset \in \mathcal{U}_X $, lo que contradeciría el hecho que $ \mathcal{U}_X $ es un ultrafiltro.
+
+\end{proof}
+
+\item Muestre que existe una familia $ \mathcal{A} \subseteq \mathcal{P}(\mathbb{N}) $ no enumerale e independiente. 
+\begin{proof}
+La siguiente demostración fue tomada de un paper de Stefan Geschke, quien a su vez la atribuye a Fichtenholz y Kantorovich. La referencia se encuentra en la bibliografía al final \cite{stefan}.
+
+Tome el conjunto contable $ C $ de los conjuntos finitos de $ \mathbb{Q} $ y defina por cada $ r \in \mathbb{R} $ el conjunto $ A_r = \{X \in C \,|\, X \cap (-\infty,r] \text{ es par}\} $. Estos conjuntos forman una familia independiente de conjuntos de $ C $.
+
+Tome $ S $ y $ T $ un conjunto disyunto de puntos en $ \mathbb{R} $. Para verificar que la familia es independiente tenemos que demostrar que 
+\begin{equation}
+(\bigcap_{s \in S} A_s) \cap (\bigcup_{t \in T}A_t)^C \nonumber
+\end{equation}
+tiene infinitos elementos.
+
+Ahora para verificar que tiene al menos un elemento necesitamos encontrar al menos un conjunto finito $ A $ tal que $ A \cap (-\infty,s] $ es par y $ A \cap (-\infty,t] $ es impar para todo $ s \in S $ y todo $ t \in T $.
+
+Este conjunto $ A $ lo podemos construir algoritmicamente. Tome $ (q_n)_{n\in N} $ donde $ N =\{1,\cdots, |S|+|T|\}$ una enumeración de los elementos de $ S \cup T $ ordenada.
+Es decir que $ q_i < q_{i+1}$. Ahora sea $ q_i $ el mínimo $ i $ tal que $ q_i \in T$, entonces si $ i=1 $ tome cualquier $ p_0 \in \mathbb{Q} $ tal que $ p_0 \in (-\infty, q_0) $ si $ i \not = 1 $ tome $ p_0 \in \mathbb{Q}$ tal que $ p_0 \in (q_{i-1},q_i) $ y entonces $ A = A'\cup\{q\} $. Ahora buscamos el siguiente $ q_k $ tal que $ q_k \in S $, y tomamos $ p_1 $ un racional que este en $ (q_{k-1},q_{k}) $. Este proceso termina en algún punto porque $ N $ es finito y al final $ A = \{b_1,\cdots b_k\}$ es el conjunto buscado.
+
+A partir de este $A$ podemos concluir que hay infinitos conjuntos que cumplen la propiedad. Por ejemplo, podemos ver que si agregamos racionales mayores que $ q_{|S|+|T|} $ estos conjuntos respetan la paridad establecida. Por lo tanto, los $ A_r $ son una familia independiente no contable. 
+\end{proof}  
+
+Muestre que existe una familia $ \mathcal{A} \subseteq \mathcal{P}(\mathbb{N}) $ no enumerable y \textit{casi disyunta} (i.e. $ A \cap B $ es finito para cualesquiera $ A,B \in \mathcal{A} $). 
+\item \begin{proof}
+
+Esta demostración también proviene del paper mencionado anteriormente \cite{stefan}.
+
+Tome el conjunto $ \mathbb{Q} $. Como $ \mathbb{R} $ es de Frechet-Urysohn y $ \mathbb{Q} $ es denso en $ \mathbb{R} $, tenemos que por cada $ r \in \mathbb{R} $ existe al menos una sucesión $ \{q_n^r\}_{n \in \omega} $ de elementos en $ \mathbb{Q} $ tal que converge a $ r $. Además podemos tomar sucesiones tales que no sean eventualmente constantes. Por lo tanto, defina el conjunto $ A_r $ como $ \{q_n^r\,|\,n \in \omega\} $. La colección $ \{A_r\}_{r \in \mathbb{R}} $ es una familia casi disyunta no enumerable. Para probar esto tomese cualesquiera $ s,r \in \mathbb{R} $ tales que $ s \not = r $. En primer lugar vemos que $ A_r $ y $ A_s $ son conjuntos infinitos. Entonces podemos tomar las bolas de radio $ \epsilon = |r-s|/2$ $ B_\epsilon(r) $ y $ B_\epsilon(s) $ que son disyuntas y por definición de convergencia únicamente finitos elementos de $ A_r $ y $ A_s $ pueden estar por fuera de sus respectivas bolas. Por lo tanto, la intersección $ A_r \cap  A_s$ puede ser a lo sumo finito. Esto demuestra que la familia es casi disyunta.
+
+\end{proof}
+
+\end{enumerate}
+\begin{thebibliography}{9}
+
+\bibitem{stefan}
+  Stefan Geschke,
+  \emph{ALMOST DISJOINT AND INDEPENDENT FAMILIES}. 
+  \url{http://www.hcm.uni-bonn.de/fileadmin/geschke/papers/IndependentFamilies_03.pdf}
+
+\end{thebibliography}
+\end{document}
