@@ -1,0 +1,94 @@
+\documentclass[letter,twoside,12pt]{article}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsthm}
+\usepackage{fullpage}
+\usepackage{latexsym}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+\title{Topología: Tarea \#7}
+\newtheorem{theo}{Teorema}
+\newtheorem{lemma}[theo]{Lema}
+\newtheorem*{defi}{Definición}
+\author{Jonathan Andrés Niño Cortés}
+\begin{document}
+\maketitle
+\begin{enumerate}
+	\item Sean $ X, Y $ espacios topológicos con $ Y $ compacto de Hausdorff. Demuestre que una función $ f: X \to Y $ es continua si y sólo si su gráfica 
+	\begin{equation}
+	G_f = \{(x,f(x))\,:\,x \in X \}
+	\end{equation}
+	es cerrada en $ X \times Y $. Este es el ejercicio 8 de la página 194 del Munkres.
+	\begin{proof}
+		($ \Leftarrow $) Suponga que $ f $ es continua. Vamos a demostrar que $X \times Y \backslash G_f $ es abierto. Tome un punto $ x \times c \not \in G_f $. Como $ f $ es una función existe $ y = f(x) $ tal que $ x \times y \in G_f $. Entonces tenemos que $ c \not = y $. Ahora como $ Y $ es Hausdorff tenemos que existen vecindades $ U $ y $ V $ disyuntas de $ c $ y $ y $ respectivamente.
+		
+		Además como $ f $ es continua tenemos que $ f^{-1}(V) $ es abierto en $ X $. Luego $  f^{-1}(V) \times U $ es un vecindario de $ x \times c $ contenido en $ X \backslash G_f $. $ x \in f^{-1}(V) $ porque $ f(x)=y \in V $ y $ c \in U $ porque $ U $ es un vecindario de $ c $. Por otra parte, si algún $ a \times b \in f^{-1}(V) \times U $ pertenece a $ G_f $ entonces tenemos que $ b = f(a) $ por lo que $ a \in f^{-1}(U) $, pero $ a \in f^{-1}(V) $ y $ U $ y $ V $ son disyuntos por lo que llegariamos a una contradicción con la buena definición de la función $ f $. Concluimos que $ G_f $ es cerrado.
+		
+		($ \Rightarrow $) Suponga que $ G_f $ es cerrado. Primero vamos a demostrar que si $ Y $ es compacto entonces $ \pi_X $, la proyección sobre $ X $ es un mapa cerrado. Sea $ C $ un subespacio cerrado de $ X \times Y $ y tomemos $ \pi_X(C) $. Vamos a demostrar que el complemento es abierto entonces tome $ x \not  \in f(X) $. Esto significa que para todo $ y \in Y $ $ x \times y \not \in C $. Luego concluimos que $ (X \times Y) \backslash C $ es un vecindario que cubra la fibra de $ x $. Entonces por el Lema del tubo existe un tubo $ V \times Y \subseteq (X \times Y)\backslash C $. Como para todo $ a \in X $ se cumple que para todo $ y \in Y $ $ a \times y \not \in C $ concluimos que $ x \in V \subseteq X \backslash \pi_X(C)$. Por lo tanto $  \pi_X(C) $ es cerrado.
+		
+		Ahora para probar el enunciado inicial tome cualquier vecindario $ V $ de $ Y $. Tenemos que $ Y \backslash V $ es cerrado. Luego $C = X \times (Y \backslash V) \cap G_f $ es la intersección de dos conjuntos cerrados de $ X \times Y $ y por lo tanto también es cerrado.
+		
+		Entonces por lo demostrado anteriormente $ \pi_X(C) $ también es cerrado. El complemento de $ \pi_X(C) $ es precisamente $ f^{-1}(V) $. $ x \in f^{-1}(V) $ es equivalente a que $ f(x) \in V $. Tenemos que $ x \times f(x) $ es la única tupla de $ x $ contenida en $ G_f $ pero $ f(x) \not \in (Y \backslash V) $. Esto equivale a que para todo $ y  \in Y $ $ x \times y \not \in C $ luego $ x \not \in \pi_X(C) $.
+		
+	\end{proof}
+	\item Sean $ X $ un compacto de Hausdorff, $ U \subseteq X $ abierto y $ p \in U $. Pruebe que existe un abierto $ V $ tal que $ p \in V $ y $ \overline{V} \subseteq U $.
+	\begin{proof}
+		En el Munkres tenemos el siguiente Lema. Si $ X $ es de Hausdorff, $ K $ es un subespacio compacto de $ X $ y $ p \not \in K $ entonces existen dos vecindarios disyuntos $ U $ y $ V $ tales que $ K \subseteq U $ y $ p \in V $.
+		
+		Entonces tome cualquier vecindario abierto $ U $ de $ p $. El complemento de $ U $ es cerrado y como es un subespacio de un compacto de Hausdorff concluimos que es compacto también. Luego por el lema anterior existen vecindarios $ U' $ y $ V $ tales que $ X \backslash Y \subseteq U' $, $ p \in V $ y $ U' \cap V = \emptyset$. Y precisamente $ V $ es el vecindario buscado. Si suponemos por contradicción que $ \overline{V} \not \in U  $ entonces existe $ x \in X \backslash U $ tal que $ x \in \overline{V} $. Pero precisamente existe un vecindario $ U' $ de $ x $ tal que $ U' \cap V = \emptyset $. Concluimos que $ \overline{V} \subseteq U $. 
+	\end{proof}
+	
+	\item Suponga que $ (X, \tau) $ es un compacto de Hausdorff, $ p \in X $ y existe una familia enumerable $ \{U_n\,:\, n \in \omega \} \subseteq \tau $ tal que $ \bigcap_{n \in \omega}U_n =\{p\} $. Demuestre que $ X $ es primero contable en $ p $.
+	
+	\begin{proof}
+		La idea central de esta demostración fue aportada por Santiago Cortes.
+		
+		Construya recursivamente una familia $ V_n $ de vecindades de $ p $ de la siguiente manera. $ V_1 $ será un vecindario de $p$ tal que $ \overline{V_1} \subseteq U_1 $. Nótese que esta vecindad existe por el punto anterior.
+		
+		Ahora $ V_n $ será un vecindario de $ p $ tal que $ \overline{V_n} \subseteq V_{n-1} \cap U_n $, que de nuevo existe por el punto 2.
+		Obsérvese que $ V_{n+1} \subseteq V_n $ por lo que $ V_n $ forman una cadena, es decir un orden lineal completo bajo contenencias.
+		
+		Si suponemos por contradicción que este no es el caso entonces tenemos que existe algún vecindario $ U $ de $ p $ tal que para todo $ n \in \omega $, $V_n \not \subseteq U $. Claramente si esto se cumple entonces $ \overline{V_n} \not \subseteq U  $ y entonces para todo $ n $, $ \overline{V_n} \backslash U \not = \emptyset $ es cerrado y por lo tanto compacto. Ahora obsérvese que cualquier intersección finita $ \bigcap_{n \in S} \overline{V_n} \backslash U $, donde $ S \subseteq \omega $ es finito, es no vacía. Se puede tomar $ N $ el máximo $n \in S$ pues $ S $ es finito. Y como  $ \overline{V_N} \backslash U \not = \emptyset $ podemos tomar un elemento $ x $. Como para cualquier $ n \leq N $ se cumple que $ V_N \subseteq V_n $ concluimos que para todo $ n \in S $ $ x \in \overline{V_n} \backslash U $. Por lo tanto $ x \in \bigcap_{n \in S} \overline{V_n} \backslash U $. Luego concluimos que  $ \bigcap_{n \in \omega} \overline{V_n} \backslash U  \not \empty$. Pero por construcción tenemos que $ \overline{V_n} \backslash U \subseteq U_n $. Luego  $ \bigcap_{n \in \omega} \overline{V_n} \backslash U  \subseteq \bigcap_{n \in \omega} U_n = \{p\}$. Luego concluimos que  $ \bigcap_{n \in \omega} \overline{V_n} \backslash U = \{p\} $ pero esto es una contradicción porque $ p \in U $ y por lo tanto no esta en ningun conjunto $ V_n \backslash U $. Luego $ p $ no esta en la intersección.
+		
+	\end{proof}
+	
+	\item Sea $ X $ un espacio compacto de Hausdorff y sea $ \{x_n\}_{n \in \mathbb{N}} $ una sucesión arbitraria de puntos en $ X $. Muestre que la función $ f: \beta\mathbb{N}\to X  $ definida por
+	\begin{equation}
+	f(\mathcal{U})=\lim_{n \to \mathcal{U}} x_n
+	\end{equation}
+	es continua.
+	
+	\begin{proof}
+		El teorema visto en clase que toda secuencia en un espacio compacto de Hausdorff cuando $ n $ converge a un filtro converge y sólo converge a un único punto nos garantiza que la función está bien definida.
+		
+		Ahora para demostrar que es continua primero demostramos el siguiente Lema
+		
+		\begin{lemma}
+			Sea $ \mathcal{U} $ un ultrafiltro y $ \{x_n\} $ una sucesión en $ X $. Si $U$ es un abierto en $ X $ tal que $ N_U=\{n \in \mathbb{N}\,:\, x_n \in U \} \in \mathcal{U} $ entonces $ x = \lim_{n \to \mathcal{U}} x_n \in \overline{U} $.
+			
+			\begin{proof}
+				Suponga por contradicción que $ x \not \in \overline{U} $. Entonces existe un vecindario $ V $  de $ x $ tal que $ U \cap V  = \emptyset $. Pero por definición de convergencia $ N_V = \{ n \in \mathbb{N}\,:\, x_n \in V \} \in \mathcal{U} $. Pero $ N_U $ y $ N_V $ son disyuntos y como ambos pertenecen al ultrafiltro, el vacío también perteneceria al vacío lo cual es una contradicción.
+			\end{proof}
+			
+		\end{lemma}
+		
+		Ahora para demostrar el enunciado tome un conjunto abierto $ U $ y veamos que $ f^{-1}(U) $ es abierta. Tome cualquier ultrafiltro $ \mathcal{U} \in f^{-1}(U) $. Sea $ x = \lim_{n \to \mathcal{U}}x_n $. Por el punto 2 existe un vecindario $ V $ de $x$ tal que $ \overline{V} \subseteq U $. Entonces si tomamos $ N_V=\{n \in \mathbb{N}\,:\, x_n \in V  \} $ el básico $ [N_V] $ es un vecindario de $ \mathcal{U} $ contenido en $ f^{-1}(U) $. 
+		
+		Claramente $ \mathcal{U} \in [N_V] $ porque $ V $ es un vecindario de $x$. Además si tomamos cualquier filtro $ \mathcal{U}' \in [N_V] $, por el lema tenemos que $ \lim_{n \to \mathcal{U}'}x_n \in \overline{V} \subseteq U $. Por lo tanto, $ [N_V] \in f^{-1}(U) $. 
+		
+	\end{proof}
+	\item Sea $ K $ un subespacio compacto de la línea de Sogenfrey $ \mathbb{R}_{\ell} $. Muestre que $ K $ es a lo sumo enumerable.
+	\begin{proof}
+		Primero vamos a demostrar que todo elemento en $ K $ exceptuando el mínimo si existe tiene un predecesor inmediato. Suponga por contradicción que este no es el caso. Entonces existe un elemento $ a $ diferente del mínimo tal que para todo $ b < a $ existe un elemento $ c $ tal que $ b < c < a $. Entonces podemos construir una cadena de elemento infinita de elementos menores que $a$ y mayores a $b$ de manera recursiva. Tome $ x_1 = b $ y $ x_n $ tal que $ x_{n-1}<x_n< a $ que siempre se puede encontrar por nuestras hipótesis. Entonces tome la cobertura abierta dada por $ \{[x_n,x_{n+1}) \,:\, n \in \omega \} \cup \{((-\infty,x_1), [a,\infty)\} $. Notese que es infinita y disyunta. Entonces no existe una subcobertura finita porque no podemos quitar siquiera uno de los intervalos de la forma $ [x_n,x_{n+1}) $ pues ningun otro abierto en la cobertura cubre esa porción. Llegamos a una contradicción con la compacidad de $ K $, esto demuestra la afirmación.
+		
+		Ahora para demostrar que hay a lo sumo enumerables puntos en $ K $. Tome $ K\backslash M $ donde $ M = \{m\}$ donde $ m $ es el mínimo o si no existe entonces $ M = \emptyset $. Todo elemento $ k \in K\backslash M $ tiene un predecesor inmediato. Denotemos a este predecesor por $ k-1 $. Entonces para todo $ k $ existe un conjunto $ (k-1,k) $ tal que si $ k_1 \not = k_2 $ entonces $ (k_1-1,k_1) \cap (k_2-1,k_2) = \emptyset $. Como los racionales son densos en $ \mathbb{Q} $ y estos conjuntos pertenecen a la topología usual de $ \mathbb{R} $ concluimos que en cada $ (k-1,k) $ existe un $ q \in \mathbb{Q} $ contenido en ese intervalo. Concluimos entonces que hay una función inyectiva entre $f: K\backslash M \to \mathbb{Q} $. Luego, $ |K\backslash M| \leq |\mathbb{Q}|= \aleph_0 $. Y pues como $ M $ tiene a lo sumo un elemento concluimos que $ |K|= |K\backslash M| \leq aleph_0 $.
+	\end{proof}
+	
+\end{enumerate}
+\end{document}
