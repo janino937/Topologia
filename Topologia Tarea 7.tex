@@ -26,7 +26,7 @@
 	\end{equation}
 	es cerrada en $ X \times Y $. Este es el ejercicio 8 de la página 194 del Munkres.
 	\begin{proof}
-		($ \Leftarrow $) Suponga que $ f $ es continua. Vamos a demostrar que $X \times Y \backslash G_f $ es abierto. Tome un punto $ x \times c \not \in G_f $. Como $ f $ es una función existe $ y = f(x) $ tal que $ x \times y \in G_f $. Entonces tenemos que $ c \not = y $. Ahora como $ Y $ es Hausdorff tenemos que existen vecindades $ U $ y $ V $ disyuntas de $ c $ y $ y $ respectivamente.
+		($ \Leftarrow $) Suponga que $ f $ es continua. Vamos a demostrar que $X \times Y \backslash G_f $ es abierto. Tome un punto $ x \times c \not \in G_f $. Como $ f $ es una función existe $ y = f(x) $ tal que $ x \times y \in G_f $. Entonces tenemos que $ c \not = y $. Ahora como $ Y $ es de Hausdorff tenemos que existen conjuntos abiertos $ U $ y $ V $ disyuntas de $ c $ y $ y $ respectivamente.
 		
 		Además como $ f $ es continua tenemos que $ f^{-1}(V) $ es abierto en $ X $. Luego $  f^{-1}(V) \times U $ es un vecindario de $ x \times c $ contenido en $ X \backslash G_f $. $ x \in f^{-1}(V) $ porque $ f(x)=y \in V $ y $ c \in U $ porque $ U $ es un vecindario de $ c $. Por otra parte, si algún $ a \times b \in f^{-1}(V) \times U $ pertenece a $ G_f $ entonces tenemos que $ b = f(a) $ por lo que $ a \in f^{-1}(U) $, pero $ a \in f^{-1}(V) $ y $ U $ y $ V $ son disyuntos por lo que llegariamos a una contradicción con la buena definición de la función $ f $. Concluimos que $ G_f $ es cerrado.
 		
@@ -41,13 +41,13 @@
 	\begin{proof}
 		En el Munkres tenemos el siguiente Lema. Si $ X $ es de Hausdorff, $ K $ es un subespacio compacto de $ X $ y $ p \not \in K $ entonces existen dos vecindarios disyuntos $ U $ y $ V $ tales que $ K \subseteq U $ y $ p \in V $.
 		
-		Entonces tome cualquier vecindario abierto $ U $ de $ p $. El complemento de $ U $ es cerrado y como es un subespacio de un compacto de Hausdorff concluimos que es compacto también. Luego por el lema anterior existen vecindarios $ U' $ y $ V $ tales que $ X \backslash Y \subseteq U' $, $ p \in V $ y $ U' \cap V = \emptyset$. Y precisamente $ V $ es el vecindario buscado. Si suponemos por contradicción que $ \overline{V} \not \in U  $ entonces existe $ x \in X \backslash U $ tal que $ x \in \overline{V} $. Pero precisamente existe un vecindario $ U' $ de $ x $ tal que $ U' \cap V = \emptyset $. Concluimos que $ \overline{V} \subseteq U $. 
+		Entonces tome cualquier vecindario abierto $ U $ de $ p $. El complemento de $ U $ es cerrado y como es un subespacio de un compacto de Hausdorff concluimos que es compacto también. Luego por el lema anterior existen vecindarios $ U' $ y $ V $ tales que $ X \backslash Y \subseteq U' $, $ p \in V $ y $ U' \cap V = \emptyset$. Y precisamente $ V $ es el vecindario buscado. Si suponemos por contradicción que $ \overline{V} \not \in U  $ entonces existe $ x \in X \backslash U $ tal que $ x \in \overline{V} $. Pero precisamente existe un vecindario $ U' $ de $ x $ tal que $ U' \cap V = \emptyset $, por lo que llegamos a una contradicción. Concluimos que $ \overline{V} \subseteq U $. 
 	\end{proof}
 	
 	\item Suponga que $ (X, \tau) $ es un compacto de Hausdorff, $ p \in X $ y existe una familia enumerable $ \{U_n\,:\, n \in \omega \} \subseteq \tau $ tal que $ \bigcap_{n \in \omega}U_n =\{p\} $. Demuestre que $ X $ es primero contable en $ p $.
 	
 	\begin{proof}
-		La idea central de esta demostración fue aportada por Santiago Cortes.
+		La idea central de esta demostración fue aportada por Gloria Buritica y la construcción de la familia fue dada por Santiago Cortés. 
 		
 		Construya recursivamente una familia $ V_n $ de vecindades de $ p $ de la siguiente manera. $ V_1 $ será un vecindario de $p$ tal que $ \overline{V_1} \subseteq U_1 $. Nótese que esta vecindad existe por el punto anterior.
 		
@@ -87,7 +87,7 @@
 	\begin{proof}
 		Primero vamos a demostrar que todo elemento en $ K $ exceptuando el mínimo si existe tiene un predecesor inmediato. Suponga por contradicción que este no es el caso. Entonces existe un elemento $ a $ diferente del mínimo tal que para todo $ b < a $ existe un elemento $ c $ tal que $ b < c < a $. Entonces podemos construir una cadena de elemento infinita de elementos menores que $a$ y mayores a $b$ de manera recursiva. Tome $ x_1 = b $ y $ x_n $ tal que $ x_{n-1}<x_n< a $ que siempre se puede encontrar por nuestras hipótesis. Entonces tome la cobertura abierta dada por $ \{[x_n,x_{n+1}) \,:\, n \in \omega \} \cup \{((-\infty,x_1), [a,\infty)\} $. Notese que es infinita y disyunta. Entonces no existe una subcobertura finita porque no podemos quitar siquiera uno de los intervalos de la forma $ [x_n,x_{n+1}) $ pues ningun otro abierto en la cobertura cubre esa porción. Llegamos a una contradicción con la compacidad de $ K $, esto demuestra la afirmación.
 		
-		Ahora para demostrar que hay a lo sumo enumerables puntos en $ K $. Tome $ K\backslash M $ donde $ M = \{m\}$ donde $ m $ es el mínimo o si no existe entonces $ M = \emptyset $. Todo elemento $ k \in K\backslash M $ tiene un predecesor inmediato. Denotemos a este predecesor por $ k-1 $. Entonces para todo $ k $ existe un conjunto $ (k-1,k) $ tal que si $ k_1 \not = k_2 $ entonces $ (k_1-1,k_1) \cap (k_2-1,k_2) = \emptyset $. Como los racionales son densos en $ \mathbb{Q} $ y estos conjuntos pertenecen a la topología usual de $ \mathbb{R} $ concluimos que en cada $ (k-1,k) $ existe un $ q \in \mathbb{Q} $ contenido en ese intervalo. Concluimos entonces que hay una función inyectiva entre $f: K\backslash M \to \mathbb{Q} $. Luego, $ |K\backslash M| \leq |\mathbb{Q}|= \aleph_0 $. Y pues como $ M $ tiene a lo sumo un elemento concluimos que $ |K|= |K\backslash M| \leq aleph_0 $.
+		Ahora para demostrar que hay a lo sumo enumerables puntos en $ K $. Tome $ K\backslash M $ donde $ M = \{m\}$ donde $ m $ es el mínimo o si no existe entonces $ M = \emptyset $. Todo elemento $ k \in K\backslash M $ tiene un predecesor inmediato. Denotemos a este predecesor por $ k-1 $. Entonces para todo $ k $ existe un conjunto $ (k-1,k) $ tal que si $ k_1 \not = k_2 $ entonces $ (k_1-1,k_1) \cap (k_2-1,k_2) = \emptyset $. Como los racionales son densos en $ \mathbb{Q} $ y estos conjuntos pertenecen a la topología usual de $ \mathbb{R} $ concluimos que en cada $ (k-1,k) $ existe un $ q \in \mathbb{Q} $ contenido en ese intervalo. Concluimos entonces que hay una función inyectiva entre $f: K\backslash M \to \mathbb{Q} $. Luego, $ |K\backslash M| \leq |\mathbb{Q}|= \aleph_0 $. Y pues como $ M $ tiene a lo sumo un elemento concluimos que $ |K|= |K\backslash M| \leq \aleph_0 $.
 	\end{proof}
 	
 \end{enumerate}
