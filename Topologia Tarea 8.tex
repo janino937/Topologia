@@ -1,0 +1,90 @@
+\documentclass[letter,twoside,12pt]{article}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsthm}
+\usepackage{fullpage}
+\usepackage{latexsym}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+\title{Topología: Tarea \#8}
+\newtheorem{theo}{Teorema}
+\newtheorem{lemma}[theo]{Lema}
+\newtheorem*{defi}{Definición}
+\author{Jonathan Andrés Niño Cortés}
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item Sea $ X $ un espacio de Hausdorff y suponga que todo subespacio abierto de $ X $ (en particular $ X $ mismo) es compacto. Pruebe que $ X $ es finito.
+\begin{proof}
+Suponga por contradicción que $ X $ es infinito. Como $ X $ es de Hausdorff tenemos que todos los singletons son cerrados y por lo tanto compactos. Entonces por nuestra hipótesis todo singleton es abierto. Pero entonces tendriamos una cobertura formada por todos los singletons que no tendría subcobertura finita. Llegamos a una contradicción y concluimos que $ X $ debe ser finito.
+\end{proof}
+
+
+\item Demuestre que $ \beta \mathbb{N} $ es compacto.
+
+\begin{proof}
+Vamos a demostrar que para cualquier colección de conjuntos cerrrados que tengan PIF (propiedad de intersecciones finitas no vacías) la intersección de todos los conjuntos en la colección es no vacía.
+
+Primero observe que cualquier básico $ [X] $ es abierto y cerrado. Esto es así porque para cualquier $ X \subseteq \mathbb{N} $ tenemos que $ \beta\mathbb{N}\backslash[X] = [\mathbb{N}\backslash X] $. Para demostrar lo anterior tome cualquier ultrafiltro $ \mathcal{U} $ en $ \beta\mathbb{N} $. $ \mathcal{U} \not \in [X] $ equivale a que $ X \not \in \mathcal{U} $, pero como $ \mathcal{U} $ es ultrafiltro tenemos que $ \mathbb{N} \backslash \mathbb{U} $. Esto equivale a que $ \mathcal{U} \in [\mathbb{N} \backslash X] $ y $ [\mathbb{N} \backslash X ] $ es abierto. Luego $ [X] $ es cerrado.
+Por lo tanto solamente basta con revisar que los conjuntos básicos cerrados tengan dicha propiedad.
+
+Ahora tome una colección $ \{[X_i]\}_{i \in I} $ de básicos con PIF. Queremos probar que $ \bigcap_{i \in I} [X_i] \not = \emptyset $. Esto equivale a mostrar que existe un ultrafiltro $ \mathcal{U} $ tal que $ \{X_i\}_{i \in I} \subseteq \mathcal{U} $ y esto ya fue realizado en una tarea anterior.
+$ \{X_i\} $ es una subbase de filtro debido a la propiedad PIF. Luego, utilizando el Lema de Zorn, podemos probar que existe un ultrafiltro que contiene a $ \{X_i\} $.
+
+Sea $ P $ el conjunto de los filtros que contienen a $  \{X_i\} $. $ P $ no es vacío, pues por un teorema demostrado e la tarea 6 existe un filtro generado por $  \{X_i\} $ que contiene a $  \{X_i\} $. Ahora si tomamos $ T $ una cadena de elementos en $ P $ entonces tenemos que $M = \bigcup_{F \in T} F $ es una cota superior de esta cadena. En primer lugar, como el vacío no se encuentra en ninguno de los elementos de la cadena, no se encuentra en la unión. Por otra parte si $ A, B \in M $ entonces existe $ F_1 $ y $ F_2  \in T$ tales que $ A \in F_1 $ y $ B \in F_2 $ si suponemos sin pérdida de generalidad que $ F_1 \subseteq F_2 $ entonces $ A \in F_2 $. Por lo tanto como $ F_2 $ es un filtro tenemos que $ A \cap B \in F_2 \subseteq M$. Además si $C$ es tal que para algún elemento $ A \in M $ $ A \subseteq C $, entonces como $ A \in F $ para algún $ F \in T $ tenemos que $ C \in T $ por lo que $ C \in M $. Por lo tanto es un filtro. Además contiene  a $  \{X_i\} $ porque todos los filtros de $ T $ lo contienen.
+Luego por el Lema de Zorn existe un filtro máximal $ \mathcal{U} $ que contiene a $ \{X_i\}_{i \in I} $ y en la tarea anterior se demostró que un filtro máximal es un ultrafiltro.
+
+\end{proof}
+
+\item Use el ejercicio anterior y el ejercicio 4 de la tarea 7 para mosttar que si $ f : \mathbb{N} \to \mathbb{N} $ es una función cualquiera entonces existe $ g : \beta\mathbb{N} \to \beta\mathbb{N} $ continua tal que $ g \upharpoonright \mathbb{N} = f $ (aquí estamos identificando los naturales con los ultrafiltros principales de la manera obvia).
+
+\begin{proof}
+La manera obvia es identificar el natural $ n $ con el ultrafiltro principal generado por $ n $. Para demostrar el enunciado vamos a construir una función $ g $ a partir de la función $ f $ dada. Definimos $ g : \beta\mathbb{N} \to \beta\mathbb{N} $ como \begin{equation}
+g(\mathcal{U}) = \lim_{n \to \mathcal{U}} f(n) \nonumber
+\end{equation}
+Donde $ \{f(n)\} $ es la sucesión de ultrafiltros principales generados por las imágenes de $ f $ evaluadas en cada $ n $.
+
+Primero demostremos que $ g \upharpoonright \mathbb{N} = f $. En efecto si tomamos $ m \in \mathbb{N} $ tenemos que
+\begin{equation}
+g(m) =  \lim_{n \to m} f(n) = f(m). \nonumber
+\end{equation}
+
+Ahora para demostrar que esta función es continua utilizando el punto 4 de la tarea anterior necesitamos que $ \beta\mathbb{N} $ sea compacto y de Hausdorff. Lo primero esta dado por el punto anterior. Lo segundo se tiene porque si tomamos dos ultrafiltros tales que $ \mathcal{U}_{1} \not = \mathcal{U}_{2} $, entonces podemos suponer sin pérdida de generalidad que existe $ X \in \mathcal{U}_1 $ tal que $ X \not \in \mathcal{U}_2 $. Pero por propiedades de ultrafiltros tenemos que $\mathbb{N} \backslash X \in \mathcal{U}_2 $. Luego tenemos que $ \mathcal{U}_1 \in [X] $ y $ \mathcal{U}_2 \in [\mathbb{N}\backslash X]$ y por la primera parte de la demostración del segundo punto de esta tarea tenemos que estos vecindarios son complementos entre sí y por lo tanto disyuntos. Luego $ \beta \mathbb{N} $ es compacto y de Hausdorff y por el punto cuatro de la tarea anterior concluimos que $ g $ es continua.
+
+
+\end{proof}
+
+\item Sea $ X $ un espacio compacto de Hausdorff y sea $ \{U_n\}_{n \in \omega} $ una sucesión de subconjuntos abiertos de $ X $. Pruebe que si cada $ U_n $ es denso en $ X $ (i.e $ \overline{U}_n = X $) entonces $ \bigcap_{n=0}^{\infty} U_n $ también es denso en $ X $.
+
+\begin{proof}
+Tome cualquier abierto $ A $ de $ X $. Vamos a demostrar que $ A \cap (\bigcap_{n \in \omega} U_n) \not  = \emptyset  $. Primero obsérvese que para cualquier $ n \in \omega $ y para cualquier abierto $ B $ se tiene que $ U_a \cap B \not = \emptyset$ pero además como cada $ U_n $ es abierto tenemos que $ U_a \cap B $ también es un abierto. Y por el punto 2 de la tarea anterior en un espacio compacto de Hausdorff para cualquier abierto no vacío siempre se puede encontrar un abierto no vacío $ B $ tal que $ \overline{B} $ esta contenido en el conjunto.
+
+Luego podemos construir una familia de conjuntos de manera recursiva de la siguiente manera. Sea $ V_1 $ un abierto no vacío tal que $ \overline{V_1} \subseteq U_1 \cap A  $. Por lo anterior $ V_1 $ existe y podemos elegirlo. Ahora sea $ V_n $ un abierto no vacío tal que $ \overline{V}_{n} \subseteq V_{n-1} \cap U_n $ que también existe por lo anterior. Vemos por construcción que $ V_{n+1} \subseteq V_{n} $. Luego $ \{V\}_{n \in \omega} $ es una cadena con el orden de contenencias. Además tenemos que $ \overline{V}_n \subseteq \overline{V}_{n+1}$ y cada $ \overline{V}_n $ es un subesapcio cerrado y por lo tanto compacto de $ X $.
+
+Por lo tanto, tenemos que $ \bigcap_{n = 0 }^m \overline{V_n} = \overline{V_m} \not = \emptyset $ y por compacidad de $ X $ concluimos que $ \bigcap_{n \in \omega} \overline{V_n} \not = \emptyset $. Por ultimo tenemos que $ \overline{V_n} \subseteq A \cap U_n $. Por lo tanto,  $ \bigcap_{n \in \omega} \overline{V_n} \subseteq  \bigcap_{n \in \omega} A \cap U_n = A \cap (\bigcap_{n \in \omega} U_n)$. Por lo tanto, este ultimo no es vacío y concluimos que $ \bigcap_{n \in \omega} U_n $ es denso.
+\end{proof}
+\item Muestre que para cualquier espacio $ X $ las siguientes afirmaciones son equivalentes:
+\begin{enumerate}
+\item $ X $ es compacto y metrizable.
+\item $ X $ es homeomorfo a un subespacio cerrado de $ [0,1]^\omega $.
+\end{enumerate}
+\begin{proof}
+$ (a) \Leftarrow (b) $. Sabemos que $ [0,1]^{\omega} $ es compacto por Tychonoff. Entonces cualquier subespacio cerrado $ C $ de $ [0,1]^{\omega} $ es compacto. Además por una tarea anterior sabemos que $ [0,1]^{\omega} $ es metrizable pues se puede ver como un subespacio de el espacio metrizable $ \mathbb{R}^\omega $. Pero por el mismo argumento $ C $ también es metrizable y esto concluye esta parte de la demostración.
+
+$ (a) \Rightarrow (b) $. Suponga que $ X $ es compacto y metrizable. Entonces existe un subconjunto $ A $ de $ X $ tal que es denso y enumerable. Para construirlo tome primero $ \{B_1(x)\}_{x \in X} $ las bolas de radio 1 alrededor de todos los puntos de $ X $. Estas bolas forman una cobertura abierta y por lo tanto tiene una subcobertura finita. Sea $ S_1 $ los conjuntos que forman esta subcobertura y tome $ P_1 = \{x \in X: B_1(x) \in S_1 \} $, es decir, los centros de las bolas que forman la subcobertura finita. Ahora para cualquier $ n \in \omega $ tome $ \{B_{1/n}(x)\}_{x \in X} $ que también forman una cobertura abieta y que por lo tanto tienen una subcobertura finita. Entonces sea $ S_n $ dicha subcobertura y tome $ P_n = \{ x \in X: B_{1/n}(x) \in S_n \} $. Entonces $ P = \bigcup_{n \in \omega} P_n $ es un conjunto denso enumerable en $ X $. En primer lugar es enumerable pues la unión enumerable de conjuntos finitos es enumerable. Ahora para probar que es denso tome cualquier conjunto básico de $ X $, es decir. cualquier bola $ B_\epsilon(x) $ con $ x \in X $ y $ \epsilon > 0 $. Ahora por propiedad arquimediana de los reales puedo encontrar un $ n \in \mathbb{N} $ tal que $ 1/n < \epsilon/2 $. Entonces tenemos que debe existir un $ p \in P_n $ tal que $ x \in B_{1/n)(p)}$. Esto quiere decir que $ d(p,x)<1/n<\epsilon/2<\epsilon $, por lo tanto tenemos que $ p \in B_{\epsilon}(x) $, es decir que la intersección entre $ P $ y $ B_\epsilon(x) $ es no vacía por lo que $ P $ es denso en $ X $.
+
+Teniendo este resultado podemos utilizar el punto 2 de la tarea 4 para concluir que $ X $ es homeomorfo a un subespacio de $ \mathbb{R}^\omega $.
+Ahora obsérvese que para todo $ n \in \omega $, $ \pi_n(X) $, es decir, la imagen bajo la proyección en la coordenada $ n $ de $ X $ es compacta pues proyección es una función continua.    
+ 
+
+Además tenemos que $ \mathbb{R}^{\omega} $ es homeomorfo a $ (0,1)^{\omega} $ porque $ \mathbb{R} $ es homeomorfo $ (0,1) $ (tome como homeomorfismo por ejemplo, la función $ \frac{\arctan(x)}{2\pi} + \frac{1}{2}$). Luego por composición de homeomorfismos tenemos que $ X $ es homeomorfo a un subespacio compacto de $ (0,1)^\omega $ que a su vez sería un subespacio de $ [0,1]^{\omega} $. Finalmente como $ [0,1]^{\omega} $ es de Hausdorff, pues es producto de espacios de Hausdorff, concluimos que cualquier subespacio compacto es cerrado.
+\end{proof}
+
+\end{enumerate}
+\end{document}
