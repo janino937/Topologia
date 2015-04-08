@@ -1,0 +1,128 @@
+\documentclass[letter,twoside,12pt]{article}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{accents}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsthm}
+\usepackage{fullpage}
+\usepackage{latexsym}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+\title{Topología: Tarea \#9}
+\newtheorem{theo}{Teorema}
+\newtheorem{lemma}[theo]{Lema}
+\newtheorem*{defi}{Definición}
+\author{Jonathan Andrés Niño Cortés}
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+\item Pruebe que toda sucesión convergente en $ \beta \mathbb{N} $ es eventualmente constante.
+
+\begin{proof}
+Supongamos por contradicción que hay una sucesión convergente $ \{x_n\} \to p $ tal que no es eventualmente constante. Esto implica que hay infinitos términos diferentes entre sí. Puede que los términos se repitan pero siempre podemos tomar una subsucesión tal que todos sus términos sean diferentes entre sí, entonces podemos suponer sin pérdida de generalidad que $ x_n \not = x_m $ si $ n \not = m $.
+
+
+
+Lo primero que vamos a demostrar es que en un espacio de Hausdorff como $ \beta \mathbb{N} $ toda sucesión convergente es discreta. Tome algun $ x_n $ en la sucesión. Por Hausdorff tenemos que existe dos vecindarios disyuntos $ A $ y $ B $ tales que $ x_n \in A $ y $ p \in B $. Pero por convergencia tenemos que solo finitos elementos de la sucesión quedan por fuera de $ B $. Entonces sean $ x_{n_1} \cdots x_{n_m} $ estos finitos elementos por fuera de $ B $. Por Hausdorff podemos encontrar una vecindad $ A_i $ de $ x_n $ tal que $ x_{n_i} \not \in A_i $. Entonces $ \bigcap_{i=0}^n A_i \cap A $ sería una vecindad de $ x_n $, pues son intersecciones finitas, que no contienen a ningun otro elemento de la sucesión, por lo tanto $ x_n $ es aislado y como esto pasa para cualquier término en la sucesión concluimos que la sucesión es discreta.
+
+En $ \beta\mathbb{N} $ esto significa que existe una familia enumerable de básicos $ \{[A_i]\}_i \in \mathbb{N} $ tales que $ x_i \in [A_i] $ y $ x_j \not \in [A_i] $ si $ j \not = i $.  
+
+Pero además de esto podemos contruir una famila disyuntas de básicos que contengan a uno sólo de los ultrafiltros. Esto lo podemos hacer de manera recursiva. Sea $ [B_1] = [A_1] $. Ahora sea $ [B_n] = [A_n\cap(\bigcap_{i=1}^{n-1} B_{i}^C)] = [A_n]\cap(\bigcap_{i=1}^{n-1} [B_{i}^C]) = [A_n]\cap (\bigcup_{i=1}^{n-1} [B_{i}])^C = [A_n] \backslash \bigcup_{i=1}^{n-1} [ B_{i}]$ (Se estan utilizando las propiedades demostradas en clase de estos abiertos básicos $ [A \cap B]= [A]\cap[B] $ y $ [A]^C =[A^C]$). Cada $ [B_n] $ contiene al término $ x_n $ porque para todo $ [B_i] $ con $ i < n $ se tiene que $ [B_i]\subseteq [A_i] $ y como $ x_n \not \in [A_i] $ se tiene que $ x_n \not  \in [B_i] $. Luego $ x_n \in [A_n] \backslash \bigcup_{i=1}^{n-1} [ B_{i}] $. Y también no contiene a ningún otro elemento de la sucesión porque es un subconjunto de $ [A_n] $ que no contenia a ningún otro elemento de la sucesión. Finalmente esta familia es disyunta porque si tomamos cualesquiera $ [B_m], [B_n] $ con $ n \not = m $, podemos suponer sin pérdida de generalidad que $ m < n $ y entonces $ [B_n] \cap [B_m]=[A_n]\cap (\bigcap_{i=1}^{n-1} [B_{i}^C]) \cap [B_m] $, pero como $ [B_m]^C $ aparece en la intersección grande concluimos que toda esta intersección es igual a $ \emptyset $. 
+
+Entonces, $ [\bigcup_{i \in \mathbb{N}} B_{2i}] $ es un abierto tal que contiene a todos los términos partes de la sucesión y tal que $ x_{2m+1} \not \in [\bigcup_{i \in \mathbb{N}} B_{2i}] $ para cualquier $ m \in \mathbb{N} $, es decir, que no contiene a ningun término impar.
+
+Tome un $ x_{2m+1} $ de la sucesión. Entonces, tenemos que $ [B_{2m+1}] \cap [B_{2n}] = \emptyset $ para cualquier $ n \in \mathbb{N} $. Esto implica que $ B_{2m+1}\cap B_{2n} = \emptyset $  para cualquier $ n \in \mathbb{N} $. Luego $ B_{2m+1}\cap \bigcup_{i \in \mathbb{N}} B_{2i} = \bigcup_{i \in \mathbb{N}} (B_{2m+1}\cap B_{2i}) = \bigcup_{i \in \mathbb{N}} \emptyset = \emptyset  $.
+
+Esto implica que $ [B_{2m+1}] \cap [\bigcup_{i \in \mathbb{N}} B_{2i}] = [B_{2m+1} \cap \bigcup_{i \in \mathbb{N}} B_{2i}] = \emptyset $. Lo que a su vez implica que $ x_{2m+1} \not \in [\bigcup_{i \in \mathbb{N}} B_{2i}] $. Pero entonces tenemos que todos los impares estan contenidos en $ [\bigcup_{i \in \mathbb{N}} B_{2i}]^C = [(\bigcup_{i \in \mathbb{N}} B_{2i})^C] $. Y por propiedades de los ultrafiltros tenemos que $ \bigcup_{i \in \mathbb{N}} B_{2i} \in p $ o $ (\bigcup_{i \in \mathbb{N}} B_{2i})^C \in p $, es decir, que existe un vecindario de $ p $ que deja por fuera a infinitos elementos de la sucesión, lo cual es una contradicción con la suposición que la sucesión convergia a $ p $. Concluimos entonces que toda sucesión convergente debe ser eventualmente constante.
+\end{proof}
+
+\item Sea $ I=\mathcal{P}(\mathbb{N}) $ y para cada $ n \in \mathbb{N} $ sea $ p_n:I \to \{0,1\} $ la función definida por $ p_n(A)=1 $ si $ n \in A $ y $ p_n(A)=0 $ si $ n \not  \in A $. Note que $ P:=\{ o_n; n \in \mathbb{N}\} $ es un subconjunto del espacio producto $ \{0,1\}^I $. Demuestre que para todo $ x \in \{0,1\}^I $ se tiene que
+
+\begin{equation}
+x \in \overline{P} \Leftrightarrow \{A \in I: x(A)=1\} \text{ es un ultrafiltro sobre } \mathbb{N}. \nonumber
+\end{equation}
+
+\begin{proof}
+$ "\Leftarrow" $: Sea $ x \in  \overline{P} $. Vamos a demostrar que $ \{A \in I: x(A)=1\} $ es un ultrafiltro.
+
+Primero veamos algunas propiedades generales de los $ p_n $.
+
+\begin{enumerate}
+\item $ \forall n \in \mathbb{N}, p_n(\emptyset)=0 $, porque $ n \not \in \emptyset $ para cualquier $ n \in \mathbb{N} $.
+
+\item $ \forall n \in \mathbb{N}, p_n(\mathbb{N})=1 $, porque $ n \in \mathbb{N} $ para cualquier $ n \in \mathbb{N} $.
+
+\item $ \forall n \in \mathbb{N}$ si $ p_n(A)=1 $ y  $ p_n(B)=1  $ entonces  $  p_n(A \cap B)=1 $, porque para todo $ n \in \mathbb{N} $ si $ n \in A $ y $ n \in B $ entonces $ n \in A \cap B $.
+
+\item $ \forall n \in \mathbb{N} $ si $ p_n(A)=1 y $ $ A \subseteq B $ entonces $ p_n(B) =1 $ porque si $ n \in A $ y $ A \subseteq B $ entonces $ n \in B $.
+
+\item $ \forall n \in \mathbb{N} $, $ \forall A \in I $, $ p_n(A)=1 $ o $ p_n(\mathbb{N} \backslash A) = 1 $. Si suponemos sin pérdida de generalidad que $ p_n(A)= 0 $ entonces $ n \not \in A $. Luego $ n \in \mathbb{N} \backslash A $ por lo que $ p_n(\mathbb{N} \backslash A) = 1 $. 
+\end{enumerate}
+
+Gracias a estas propiedades podemos concluir que para cualquier $ n \in \mathbb{N}$, $ \{A \in I: p_n(A)=1\} $ es un ultrafiltro. De hecho corresponde al ultrafiltro principal generado por $ n $ porque para cualquier $ A $ en el ultrafiltro se cumple que $ p_n(A)=1 $, es decir, que $ n \in A $.
+
+Ahora para cualquier $ x $ vamos a demostrar que se cumplen las propiedades análogas a las anteriores. 
+
+\begin{enumerate}
+\item $ x(\emptyset)=0. $ Suponga por contradicción que $ x(\emptyset) = 1 $. Entonces la vecindad de $ x $ $U = \{y \in \{0,1\}^I : y(\emptyset)=1 \} $ dejaría por fuera a todos los elementos de $ P $ y por lo tanto, $ x \not \in \overline{P} $.
+
+\item $ x(\mathbb{N})=1 $. De manera similar a la anterior, suponga por contradicción que $ x(\mathbb{N}) = 0 $. Entonces la vecindad de $ x $ $U = \{y \in \{0,1\}^I : y(\mathbb{N})=0 \} $ dejaría por fuera a todos los elementos de $ P $ y por lo tanto, $ x \not \in \overline{P} $.
+
+\item Si $ x(A)=1 $ y $ x(B)=1 $ entonces $ x(A \cap B) = 1 $. Suponga por contradicción que $ x(A \cap B ) = 0 $. Entonces la vecindad de $ x $ $U = \{y \in \{0,1\}^I : y(A)= 1 \wedge y(B)=1 \wedge y(A\cap B)= 0\} $ dejaría por fuera a todos los elementos de $ P $ y por lo tanto, $ x \not \in \overline{P} $.
+
+\item Si $ x(A)=1 $ y $ A \subseteq B $ entonces $ x(B)=1 $. Suponga por contradicción que $ x(B) = 0 $. Entonces la vecindad de $ x $ $U = \{y \in \{0,1\}^I : y(A)= 1 \wedge y(B)=0 \} $ dejaría por fuera a todos los elementos de $ P $ y por lo tanto, $ x \not \in \overline{P} $.
+
+\item $ \forall A \in I $, $ x(A)=1 $ o $ x(\mathbb{N}\backslash A) = 1 $. Si suponemos por contradicción que existe un $ A \in I $ tal que $ x(A) = 0 $ y $ x(\mathbb{N}\backslash A)= 0 $ entonces la vecindad de $ x $ $U = \{y \in \{0,1\}^I : y(A)= 0 \wedge y(\mathbb{N}\backslash A)=0 \} $ dejaría por fuera a todos los elementos de $ P $ y por lo tanto, $ x \not \in \overline{P} $.
+\end{enumerate}
+
+Estas propiedades nos permiten concluir que $ \{A \in I: x(A)=1\} $ es un ultrafiltro.
+
+$ "\Rightarrow" $. Sea $ x \in \{0,1\}^I $ tal que $ \{A \in I: x(A)=1\} $ es un ultrafiltro y tome $ U $ cualquier vecindad básica de $ x $. Estas vecindades se pueden ver como finitas restricciones sobre las coordenadas de $ \{0,1\}^I $. Sean $ A_1, \cdots A_n $ las coordenadas, donde la restricción es que para cualquier $ u \in U $ $ u(A_i)=1 $ y sean $ B_1, \cdots B_m $ las correspondientes donde para cualquier $u \in U $ $ u(B_i)=0 $. Por nuestra suposición que $ \{A \in I: x(A)=1\} $ es un ultrafiltro tenemos que $ u(\mathbb{N}\backslash B_i) = 1 $ y además que $ u(A_1 \cap \cdots \cap A_n \cap \mathbb{N} \backslash B_1 \cap \cdots \cap \mathbb{N} \backslash B_m)=1 $ y que $ A_1 \cap \cdots \cap A_n \cap \mathbb{N} \backslash B_1 \cap \cdots \cap \mathbb{N} \backslash B_m \not = \emptyset $. Entonces existe un $ n $ en el conjunto anterior y el $ p_n $ correspondiente cumple todas las restricciones por lo que pertenece a $ U $. Concluimos que $ x \in \overline{P} $.
+\end{proof}
+
+\item  Muestre que $ [0,1]^\omega $ con la topología uniforme no es contablemente compacto.
+
+\begin{proof}
+Vamos a demostrar que $ [0,1]^\omega $ no es compacto por puntos límites lo que implica que no es contablemente compacto.
+
+Tome $ A = \{0,1\}^\omega $, es decir, todas las secuencias de 0's y 1's.
+
+Todos los puntos en $ A $ son aislados entre sí pues estan a una distancia igual a 1. Si tomamos dos elementos $ x $ y $ y \in A$  tales que son diferentes entonces existe un $ i \in \omega $ tal que $ (x)_i \not = (y)_i $. Luego $ d(x,y)\geq |(x)_i-(y)_i|=1 $ y $ 1 $ es la máxima distancia posible entre dos puntos. Por lo tanto podemos rodear cada punto por la bola de radio $ 1/2 $ centrada en ese y estas vecindades son tales que no se intersecan entre sí. 
+
+Además si tomamos cualquier otro elemento $ z \in [0,1]^\omega  $ tal que $ z \not \in A $, tenemos que existe un $ i \in \omega $ tal que $ (z)_i \in (0,1) $. Luego podemos tomar $ \epsilon < $min($\{ 1-(z)_i,(z)_i\}$)/2 y la bola de radio $ \epsilon $ alrededor de $ z $ es tal que no interseca a ningun punto de $ A $. Concluimos que $ [0,1]^\omega $ no es compacto por punto límite y por lo tanto no es contablemente compacto.
+\end{proof}
+
+\item Muestre que $ \mathbb{Q} $ con la topología heredada de $ \mathbb{R} $ no es localmente compacto.
+
+\begin{proof}
+Suponga por contradicción que $ \mathbb{Q} $ entonces para el punto 0 existe un compacto $ K $ tal que $ 0 $ pertenece al interior de $ K $. En particular como $ K $ sería un compacto de Hausdorff debe existir una vecindad $ V $ de 0 tal que $ \overline{V} $ esta contenido en el interior de $ K $. Podemos suponer que esta vecindad es básica. Además $ \overline{V} $ debe ser compacto pues es un subespacio cerrado de un compacto. 
+
+Ahora los básicos de $ \mathbb{Q} $ son de la forma $ (a,b) \cap \mathbb{Q} $, $ a,b \in \mathbb{Q}$ y $ a < b $. Primero $ \overline{(a,b) \cap \mathbb{Q}} = [a,b] \cap \mathbb{Q} $. En primer lugar tome $ x \in [a,b] \cap \mathbb{Q} $. Tome cualquier vecindad de $ x $. Si $ x \in \overline{(a,b)} $ entonces la vecindad ya intersecaria el conjunto. Si este no es el caso entonces $ x = a $ o  $ x = b $. Si $ x = a $ entonces cualquier vecindad de $ a $ es de la forma $ (c,d) \cap \mathbb{Q} $ con $ c<a<d $. Pero $ \frac{a+d}{2} $ sería un racional contenido en la intersección de  $ (c,d) \cap \mathbb{Q} $ y $ [a,b] \cap \mathbb{Q} $. Luego $ a $ esta en la clausura y el caso en que $ x = b $ es análogo. Finalmente, $ si x \not \in [a,b] \cap \mathbb{Q} $ entonces $ x < a $ o $ x > b $, luego $ x \in (- \infty, a) \cup (b,\infty) \cap \mathbb{Q} $ que es abierto en $ \mathbb{Q} $. Concluimos que $ [a,b] \cap \mathbb{Q} $ es cerrado, por lo que efectivamente es la clasura de $ (a,b) \cap \mathbb{Q} $.
+
+Vamos a demostrar que la clausura de cualquiera de estos básicos no es compacta. Tome $ K = [a,b] \cap \mathbb{Q} $ con $ a, b \in \mathbb{Q} $ y $ a < b $. En primer lugar sabemos que entre $ a $ y $ b $ debe existir algun irracional $ d $. Entonces considere la cobertura abierta $ \{V_\alpha\} _{\alpha \in K } $ donde $ V_\alpha = (-\infty, \alpha) $ si $ \alpha < d $ y $ V_\alpha = (\alpha,\infty) $ si $ d < \alpha $. Esta es una cobertura porque para cualquier $ k \in K $ siempre existe un racional $ q $ entre $ k $ y $ d $ porque $ \mathbb{Q} $ es denso. Luego $ k \in V_q $. Sin embargo, si tomamos finitos $ V_{\alpha_i} $ tales que $ \alpha<d $ la unión de estos sería igual a $ (-\infty,max(\alpha_i)) $, y entonces cualquier racional $ q \in (max(\alpha_i),d) $ no sería cubierto por esta colección finita y no es cubierto por ninguno de los $ V_\alpha $ con $ \alpha > d $. Luego esta cobertura no tiene subcobertura finita. Llegamos a una contradicción con lo discutido en el primer parrafo. Concluimos que $ \mathbb{Q} $ no es localmente compacto.
+  
+\end{proof}
+
+\item Demuestre que para cualquier familia $ \{X_\alpha: \alpha \in I \} $ de espacios topológicos las siguientes afirmaciones son equivalentes:
+
+\begin{enumerate}
+\item $ \prod_{\alpha \in I} X_\alpha $ es localmente compacto.
+
+\item Cada $ X_\alpha $ es localmente compacto y $  \{ \alpha \in I: X_\alpha \text{no es compacto} \} $ es finito.
+\end{enumerate}
+
+\begin{proof}
+Suponga que $ \prod_{\alpha \in I} X_\alpha $ es localmente compacto, entonces si tomamos cualquier $ x \in \prod_{\alpha \in I} X_\alpha $ existe un compacto $ K $ tal que $ x $ esta en el interior de $ K $. Entonces existe una vecindad básica $ U $ de $ x $ tal que $ U \subseteq K $. Ahora si tomamos $ \pi_\alpha(U) $ esto es igual a $ X_\alpha $ para cofinitos $ \alpha \in I $. Como $ U \subseteq K $ tenemos que $ \pi_\alpha(U) \subseteq \pi_\alpha(K) $, por lo que hay cofinitos $ \alpha \in I $ tales que $ \pi_\alpha(U) = X_\alpha $. Como $ \pi $ es continua y la imagen continua de compacto es compacto concluimos que $ X_\alpha $ es compacto para cofinitos $ \alpha \in I $.
+
+Ahora suponga que cada $ X_\alpha $ es localmente compacto y $  \{ \alpha \in I: X_\alpha \text{no es compacto} \} $ es finito. Primero vamos a demostrar que si dos espacios son localmente compactos entonces su producto es localmente compacto. Sean  $ A, B $ espacios localmente compactos y tome $ a \times b \in A, B $. Por nuestra suposición tenemos que existe $ K_A \subseteq A $ compacto tal que $ a \in \overset{\circ}{K_A} $. y $ K_B \subseteq B $ compacto tal que $ b \in \overset{\circ}{K_B} $. Luego $ K_A \times K_B $ es un compacto tal que $ a \times b $ esta en su interior.
+
+Finalmente por inducción podemos concluir que el producto de los finitos localmente compactos es compacto. Además el producto de los posiblemente infinitos compactos es compacto por Tychonoff y por lo tanto es localmente compacto. Finalmente, el producto entre la parte finita y la parte infinita sería localmente compacta también por lo demostrado anteriormente y esto concluye la demostración.
+\end{proof}
+\end{enumerate}
+\end{document}
