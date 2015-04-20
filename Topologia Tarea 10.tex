@@ -68,55 +68,39 @@
 \item Sea $ X $ un espacio de Hausdorff, regular y separable. Muestre que existe una base $ \mathcal{B} $ para la topología de $ X $ tal que $ |\mathcal{B}|\leq 2^{\aleph_0} $.
 
 \begin{proof}
-En primer lugar tenemos que en un espacio regular, podemos tomar como $ \mathcal{B} $ los abiertos regulares pues estos  son una base para la topología. Para demostrar esto considere cualquier abierto $ U $ de la topología. Por regularidad tenemos que para cualquier punto $ p $ existe una vecindad $ V $ tal que $ \overline{V} \subseteq U $. Pero luego podemos tomar el abierto regular $ \overset{\circ}{\overline{V}} $ que también es un vecindario de $ p $ pues $ V \subseteq \overset{\circ}{\overline{V}} $ y además $ \overset{\circ}{\overline{V}} \subseteq \overline{V} \subseteq U $.
+Tomo como base $ \mathcal{B} $ los abiertos regulares. Para demostrar que $ \mathcal{B} $ es una base considere cualquier abierto $ U $ de la topología. Como el espacio es regular tenemos que para cualquier punto $ p $ existe una vecindad $ V $ tal que $ \overline{V} \subseteq U $. Pero luego podemos tomar el abierto regular $ \overset{\circ}{\overline{V}} $ que también es un vecindario de $ p $ pues $ V \subseteq \overset{\circ}{\overline{V}} $ y además $ \overset{\circ}{\overline{V}} \subseteq \overline{V} \subseteq U $.
 
-Ahora vamos a demostrar que si existe un conjunto denso enumerable $ D $ entonces cada abierto regular esta univocamente determinado por los puntos del abierto que esten contenidos en él. Es decir, que para cualesquiera dos abiertos regulares $ U $ y $ V $ se tiene que si $ A \cap D $ = $ B\cap D $ entonces $ A = B $.
+Ahora vamos a demostrar que si existe un conjunto denso enumerable $ D $ entonces cada abierto regular esta univocamente determinado por los puntos del abierto que esten contenidos en él. Es decir, que para cualesquiera dos abiertos regulares $ U $ y $ V $ se tiene que si $ U \cap D $ = $ V\cap D $ entonces $ U = V $. De hecho si $ D $ es denso entonces para cualquier conjunto se tiene que $ \overline{U \cap D} = \overline{U} $. $ \overline{U \cap D} \subseteq \overline{U} $ porque $ \overline{U\cap D} \subseteq \overline{U} \cap \overline{D} = \overline{U} \cap X = \overline{U} $. Para la otra contenencia tome $ x \in \overline{U} $. Luego cualquier vecindad $ V $ de $ x $ es tal que $ U \cap V \not = \emptyset $. Pero $ U \cap V $ es un abierto y por la densidad de $ D $ tenemos que $ U \cap V \cap D \not = \emptyset $. Por lo tanto cualquier vecindad $ V $ de $ x $ es tal que $ V \cap (U \cap D) \not = \emptyset $ por lo que $ x \in \overline{U \cap D} $. Luego $ A = B $, pues por lo anterior tenemos que $ \overline{A}=\overline{A \cap D} = \overline{B \cap D}= \overline{B} $. Y como son abiertos regulares tenemos que $ A = \overset{\circ}{\overline{A}} = \overset{\circ}{\overline{B}} = B $.
 
-De hecho si $ D $ es denso entonces para cualquier conjunto se tiene que $ \overline{U \cap D} = \overline{U} $. $ \overline{U \cap D} \subseteq \overline{U} $ se tiene porque $ \overline{U\cap D} \subseteq \overline{U} \cap \overline{D} = \overline{U} \cap X = \overline{U} $. Para la otra contenencia tome $ x \in \overline{U} $. Luego cualquier vecindad $ V $ de $ x $ es tal que $ U \cap V \not = \emptyset $. Pero $ U \cap V $ es un abierto y por la densidad de $ D $ tenemos que $ U \cap V \cap D \not = \emptyset $. Por lo tanto cualquier vecindad $ V $ de $ x $ es tal que $ V \cap (U \cap D) \not = \emptyset $ por lo que $ x \in \overline{U \cap D} $.
-
-Esto nos permite concluir que $ A = B $, pues por lo anterior tenemos que $ \overline{A}=\overline{A \cap D} = \overline{B \cap D}= \overline{B} $. Y como son abiertos regulares tenemos que $ A = \overset{\circ}{\overline{A}} = \overset{\circ}{\overline{B}} = B $.
-
-Esto nos permite construir una función $ f:\mathcal{B} \to \mathcal{P}(D)  $ tal que sea inyectiva, tomando $ f(U)=U\cap D $. A partir de esto concluimos que $ |\mathcal{B}|\leq 2^{|D|}=2^{|\aleph_0|} $.
+Esto nos permite construir una función $ f:\mathcal{B} \to \mathcal{P}(D)  $ tal que sea inyectiva, tomando $ f(U)=U\cap D $. A partir de esto concluimos que $ |\mathcal{B}|\leq 2^{|D|}=2^{\aleph_0} $.
 \end{proof}
 
 \item Pruebe que $ [0,1]^A $ es separable si y sólo si $ |A|\leq 2^{\aleph_0} $.
 \begin{proof}
 
-En primer lugar por el teorema de Tychonoff sabemos que para cualquier $ A $, $ [0,1]^A $ es un espacio compacto. Además como producto de espacios de Hausdorff es de Hausdorff concluimos que también este espacio es de Hausdorff. Finalmente en una tarea anterior demostramos que cualquier compacto de Hausdorff es un espacio regular.
+$ "\Rightarrow" $ En primer lugar por el teorema de Tychonoff sabemos que para cualquier $ A $, $ [0,1]^A $ es un espacio compacto. Además como producto de espacios de Hausdorff es de Hausdorff concluimos que también este espacio es de Hausdorff. Finalmente en una tarea anterior demostramos que cualquier compacto de Hausdorff es un espacio regular.
 
-Entonces considere el conjunto $ \mathcal{B} $ de los abiertos regulares de $ [0,1]^A $. Como se demostro en el punto anterior esta sería una base para el espacio $ [0,1]^A $. Pero además se demostro que si el espacio es separable entonces esta base tendría tamaño $ 2^{\aleph_0}. $ Sin embargo, en este caso podemos demmostrar que $ |A| \leq |\mathcal{B}| $.
-
-Toma cualquier $ \alpha \in A $ y considere el abierto $ \pi^{-1}_\alpha((1/4,3/4)) $. Este abierto puede verse como $ \prod_{i_in A} X_i $ donde $ X_i = (1/4,3/4) $ si $ i = \alpha $ y $ X_i = [0,1] $ de lo contrario.
-
+Entonces considere el conjunto $ \mathcal{B} $ de los abiertos regulares de $ [0,1]^A $. Como se demostro en el punto anterior esta sería una base para el espacio $ [0,1]^A $. Pero además se demostró que si el espacio es separable entonces esta base tendría tamaño $ 2^{\aleph_0} $. Ahora vamos a demostrar que $ |A| \leq |\mathcal{B}| $. Tome cualquier $ \alpha \in A $ y considere el abierto $ \pi^{-1}_\alpha((1/4,3/4)) $.
 En una tarea anterior también demostramos que para cualquier producto $ X \times Y $ si  $ Y $ era compacto entonces la proyección $ \pi_X $ era cerrada. Eso nos permite concluir que $ \pi_\alpha $ es una función continua cerrada, si tomamos $ X $ como la coordenada $ \alpha $ y $ Y $ como el espacio producto de las demás coordenadas.
-
 Ahora considere la clausura de $ \pi^{-1}_\alpha((1/4,3/4)) $.
-
 Si una función es continua tenemos que para cualquier subconjunto $ A $ del espacio $ f(\overline{A}) \subseteq \overline{f(A)} $. Pero si además tenemos que la función es un mapa cerrado entonces concluimos que $ f(\overline{A})=\overline{f(A)} $, puesto que por nuestra suposición $ f(\overline{A}) $ sería cerrado y la clausura es el mínimo cerrado que contiene a $ f(A) $, por lo que $ \overline{f(A)} \subseteq f(\overline{A}) $.
-
 Luego tenemos que $\pi_\alpha(\overline{\pi^{-1}_\alpha((1/4,3/4))}) = \overline{\pi_\alpha(\pi_\alpha^{-1}((1/4,3/4)))}= \overline{(1/4,3/4)} = [1/4,3/4] $.
-
 Ahora si tomamos preimagen de este conjunto tenemos que
-
  $ \pi_\alpha^{-1}([1/4,3/4]) = \pi_\alpha^{-1}(\pi_\alpha(\overline{\pi^{-1}_\alpha((1/4,3/4))})) \supseteq \overline{\pi^{-1}_\alpha((1/4,3/4))} $.
-
 Y como el interior de un conjunto también esta contenido en su clausura concluimos que $ \pi_\alpha^{-1}(1/4,3/4) \subseteq \overset{\circ}{\overline{\pi_\alpha^{-1}(1/4,3/4)}} \subseteq \overline{\pi^{-1}_\alpha((1/4,3/4))} \subseteq \pi_\alpha^{-1}([1/4,3/4]) $.
 
 Luego si consideramos $ f: A \to \mathcal{B} $ tal que $ f(\alpha) = \overset{\circ}{\overline{\pi_\alpha^{-1}(1/4,3/4)}} $ esta función es una inyección ya que para diferentes $ \alpha $ el abierto dado es diferente. Tome $ \alpha, \beta \in A $ tales que $ \alpha \not = \beta $. Entonces el elemento tal que es $ 0 $ en todas las coordenadas excepto en la coordenada $ \alpha $ donde es 1/2 es un ejemplo de un elemento que pertenece a $ f(\alpha) $, pero no pertenece a $ f(\beta) $ puesto que su preimagen en la coordenada $ \beta $ es 0 y $ 0 \not \in [1/4,3/4] $.
-
 Finalmente tendriamos que $ |A|\leq |\mathcal{B}|\leq 2^{\aleph_0} $.
 
-Ahora suponga que $ |A| \leq 2^\aleph_0 $. Entonces primero analizemos el caso cuando $ A = \mathbb{R} $. En este caso el conjunto $ [0,1]^A $ puede verse como el conjunto de las funciones de $ \mathbb{R} $ al intervalo  $ [0,1]  $. Recordemos que $ \mathbb{R} $ tiene una base enumerable dada por los abiertos con extremos racionales $ (a,b) $.
+$ "\Leftarrow" $ Ahora suponga que $ |A| \leq 2^{\aleph_0} $. Entonces primero analizemos el caso cuando $ A \leq \mathbb{R} $. En este caso el conjunto $ [0,1]^A \cong [0,1]^\mathbb{R} $ puede verse como el conjunto de las funciones de $ \mathbb{R} $ al intervalo  $ [0,1] $. Recordemos que $ \mathbb{R} $ tiene una base enumerable dada por los abiertos con extremos racionales $ (a,b) $.
 
 Entonces considere $ D $ el conjunto de funciones tales que para finitos básicos abiertos en $ \mathbb{R} $ el valor que toman es un racional constante y para el resto de coordenadas es 0.
 
 Este conjunto es denso pues si tomamos cualquier abierto en el producto, este va a estar dado como un conjunto de finitas restricciones sobre las coordenadas. Luego como son finitas y $ \mathbb{R} $ es de Hausdorff podemos encontrar abiertos básicos disyuntos que contengan a cada una de las restricciones. Y finalmente como son finitos abiertos podemos encontrar una función $ D $ tal que en cada intervalo encontrado de cada coordenada tome como valor una constante racional que se encuentre en la restricción asociada a esa coordenada.
 
-Por otro lado para probar que $ D $ es enumerable basta ver que cada elemento en $ D $ esta determinado por la cantidad finita de conjuntos donde la función es no cero y a su vez cada uno de estos conjuntos esta determinado por 3 valores racionales (2 de los extremos y el valor constante que la función toma en este intervalo). Luego la cardinalidad de este conjunto es $ \displaystyle \sum_{i \in \omega} |\mathbb{Q}^{3i}|  $. Pero como $ 3i $ es finito tenemos que $ |\mathbb{Q}^{3_i}| = \aleph_0 $. Entonces el cardinal de esta suma es $ \aleph_0\aleph_0 = \aleph_0 $.
+Por otro lado para probar que $ D $ es enumerable basta ver que cada elemento en $ D $ esta determinado por la cantidad finita de conjuntos donde la función es no cero y a su vez cada uno de estos conjuntos esta determinado por 3 valores racionales (2 de los extremos y el valor constante que la función toma en este intervalo). Luego la cardinalidad de este conjunto es $ \displaystyle \sum_{i \in \omega} |\mathbb{Q}^{3i}|  $. Pero como $ 3i $ es finito tenemos que $ |\mathbb{Q}^{3i}| = \aleph_0 $. Entonces el cardinal de esta suma es $ \aleph_0\aleph_0 = \aleph_0 $.
 
-Ahora solo resta demostrar que si tenemos que $ |A|\leq |\mathbb{R}|= 2^{\aleph_0} $ entonces también podemos construir un conjunto denso enumerable.
-
-Ahora vamos a demostrar un teorema que nos puede resultar util. Si $ X $ es un espacio separable y tenemos una función sobreyectiva continua $ f: X \to Y $ entonces Y es separable. Si $ D $ es el denso enumerable de $ X $ entonces $ f(D) $ es el denso enumerable de $ Y $. En primer lugar es enumerable porque $ |f(D)|\leq |D| = \aleph_0 $. Además si tomamos cualquier abierto $ U $ en $ Y $ su preimagen $ f^{-1}(U) $ es un abierto en $ X $, pero como $ D $ es denso existe un $ d \in D $ tal que $ d \in f{-1}(U) $. Luego $ f(d) \in f(D) \cap U $ con lo que probamos que es denso.
+Ahora solo resta demostrar que si tenemos que $ |A|\leq |\mathbb{R}|= 2^{\aleph_0} $ entonces también podemos construir un conjunto denso enumerable. Para esto vamos a demostrar un teorema que nos puede resultar util. Si $ X $ es un espacio separable y tenemos una función sobreyectiva continua $ f: X \to Y $ entonces Y es separable. Si $ D $ es el denso enumerable de $ X $ entonces $ f(D) $ es el denso enumerable de $ Y $. En primer lugar es enumerable porque $ |f(D)|\leq |D| = \aleph_0 $. Además si tomamos cualquier abierto $ U $ en $ Y $ su preimagen $ f^{-1}(U) $ es un abierto en $ X $, pero como $ D $ es denso existe un $ d \in D $ tal que $ d \in f{-1}(U) $. Luego $ f(d) \in f(D) \cap U $ con lo que probamos que es denso.
 
 Ahora volviendo a nuestro problema, nuestra hipotesis indica que existe una inyección $ i:A \to \mathbb{R} $ y entonces considere $ i(A) $ la imagen de $ A $ en $ \mathbb{R} $ y observe que $ [0,1]^A \cong [0,1]^{i(A)} $. Entonces tome como función continua $ g: [0,1]^\mathbb{R}\to [0,1]^{i(A)} $ la función tal que $ f \mapsto f\upharpoonright_{i(A)} $. Esta función es continua porque para cualquier abierto en $ [0,1]^{i(A)} $ que son restricciones finitas sobre las coordenadas su preimagen también es el conjunto de funciones restrigidas en las mismas finitas coordenadas y por lo tanto también es abierto en $ [0,1]^\mathbb{R} $. Por lo tanto, por el teorema anterior $ [0,1]^A $ también es separable
 \end{proof}
@@ -143,19 +127,13 @@ Ahora suponga que se cumple b) y tome cualquier subespacio $ Y $ de $ X $. Enton
 \item \begin{enumerate}
 \item Para cada $ \alpha \in \{2,3,4\} $ pruebe que si $ X $ es un subespacio $ T_\alpha $ y existe $ f:X \to Y $ continua, cerrada y sobreyectiva, entonces $ Y $ también es $ T_\alpha $.
 \begin{proof}
-Esto no es cierto en general para $ \alpha=2,3 $ pero si para $ \alpha = 4 $. Vamos a demostrar solamente la ultima afirmación.
+Esto no es cierto en general para $ \alpha=2,3 $ pero si para $ \alpha = 4 $. Vamos a demostrar solamente la ultima afirmación. Suponga que $ X $ es un espacio normal. Como se mostro en el punto 2 si $ f $ es una función continua y cerrada entonces $ f(\overline{A})=\overline{f(A)} $.
 
-Suponga que $ X $ es un espacio normal. Como se mostro en el punto 2 si $ f $ es una función continua y cerrada entonces $ f(\overline{A})=\overline{f(A)} $.
-
-Entonces tome cualesquiera dos conjuntos disyuntos cerrados $ A $ y $ B $ de $ Y $. Ahora tome $ f^{-1}(A) $ y $ f^{-1}(B) $. Como la función es sobreyectiva ninguno de estos conjuntos es vacío y como la función es continua ambos son cerrados. Además son disyuntos pues son preimagenes de conjuntos disyuntos. Por lo tanto podemos tomar dos abiertos en $ X $, $ U $ y $ V $ tales que son disyuntos, $ f^{-1}(A) \subseteq U $ y $ f^{-1}(B) \subseteq V $.
-
-Entonces considere $ U'=f(X^C)^C $ y $ V'= f(V^C)^C $. En primer lugar estos conjuntos son abiertos porque $ f $ es un mapa cerrado, lo que implica que $ f( U^C) $ y $ f(V^C) $ son cerrados.
+Entonces tome cualesquiera dos conjuntos disyuntos cerrados $ A $ y $ B $ de $ Y $. Ahora tome $ f^{-1}(A) $ y $ f^{-1}(B) $. Como la función es sobreyectiva ninguno de estos conjuntos es vacío y como la función es continua ambos son cerrados. Además son disyuntos pues son preimagenes de conjuntos disyuntos. Por lo tanto podemos tomar dos abiertos en $ X $, $ U $ y $ V $ tales que son disyuntos, $ f^{-1}(A) \subseteq U $ y $ f^{-1}(B) \subseteq V $. Entonces considere $ U'=f(X^C)^C $ y $ V'= f(V^C)^C $. En primer lugar estos conjuntos son abiertos porque $ f $ es un mapa cerrado, lo que implica que $ f( U^C) $ y $ f(V^C) $ son cerrados.
 
 Ahora para demostrar que son disyuntos primero demostramos que si $ f $ es sobreyectiva entonces para cualquier conjunto $ A $, $ f(A)^C  \subseteq f(A^C) $. Tome cualquier elemento $ y \in f(A)^C $, entonces por definición tenemos que no existe nigun elemento $ a \in A $ tal que $ f(a) = y $, pero como la función es sobreyectiva debe existir algún elemento en $x \in  X $ tal que $ f(x)=y $ y por lo tanto concluimos que $ x \in A^C $ por lo que $ y \in f(A^C) $.
 
-Luego tenemos que $ U' \cap V' = f(U^C)^C \cap f(^C V)^C = (f(U^C)\cup f(V^C))^C = (f(U^C\cup V^C))^C   $. Pero por lo anterior tenemos que $ (f(U^C\cup V^C))^C  \subseteq f((U^C \cup V^C)^C) = f( (U^C)^C \cap (V^C)^C ) = f(U\cap V) = f(\emptyset) = \emptyset $.
-
-Finalmente vamos a demostrar que $ A \subseteq U' $. Tome cualquier elemento $ a \in A $. Entonces $ a \not \in f(U^C) $ porque de lo contrario $ f^{-1}(A) \cap U ^ C \not = \emptyset $, pero esto es una contradicción puesto que $ f^{-1}(A) \subseteq U $. La demostración que $ B \subseteq V' $ es análoga. Por lo tanto, $ Y $ es normal.
+Luego tenemos que $ U' \cap V' = f(U^C)^C \cap f(^C V)^C = (f(U^C)\cup f(V^C))^C = (f(U^C\cup V^C))^C   $. Pero por lo anterior tenemos que $ (f(U^C\cup V^C))^C  \subseteq f((U^C \cup V^C)^C) = f( (U^C)^C \cap (V^C)^C ) = f(U\cap V) = f(\emptyset) = \emptyset $. Finalmente vamos a demostrar que $ A \subseteq U' $. Tome cualquier elemento $ a \in A $. Entonces $ a \not \in f(U^C) $ porque de lo contrario $ f^{-1}(A) \cap U ^ C \not = \emptyset $, pero esto es una contradicción puesto que $ f^{-1}(A) \subseteq U $. La demostración que $ B \subseteq V' $ es análoga. Por lo tanto, $ Y $ es normal.
 \end{proof}
 \item Muestre que cualquier espacio topológico es imagen continua de un espacio métrico (en particular $ T_4 $) y por lo tanto la hipótesis en (a) de que $ f $ es cerrada no se puede omitir.
 
@@ -173,11 +151,7 @@ En particular si tomamos por ejemplo el espacio de Sierpinsky que ni siquiera es
 \begin{proof}
 Vamos a probar que para cualquier abierto $ U $ y cualquier punto $ p \in U $ existe un abierto $ V $ tal que $ p \in V $ y $ \overline{V} \in U $. Basta verificar esta propiedad para los abiertos básicos de esta topología.
 
-Estos abiertos pueden ser de la forma $ (-\infty,b) $, $ (a,b) $ o $ (a,\infty) $.
-
-Entonces debemos considerar varios casos. Primero consideremos abiertos de la forma $ (a,b) $, entonces para cualquier $ p $ en la vecindad se cumple que $ a < p < b $.
-
-Aquí debemos considerar cuatro casos diferentes dependiendo de si $ p $ es sucesor de $ a $ o de si $ p $ es predecesor de $b$ .
+Estos abiertos pueden ser de la forma $ (-\infty,b) $, $ (a,b) $ o $ (a,\infty) $. Entonces debemos considerar varios casos. Primero consideremos abiertos de la forma $ (a,b) $, entonces para cualquier $ p $ en la vecindad se cumple que $ a < p < b $. Aquí debemos considerar cuatro casos diferentes dependiendo de si $ p $ es sucesor de $ a $ o de si $ p $ es predecesor de $b$ .
 
 \begin{enumerate}
 \item $ p $ es sucesor de $ a $ y predecesor de $ b $: Entonces $ (a,b) = \{p\} $, es decir, el punto $ p $ es aislado y entonces podemos tomar $ V = \{p\} $ puesto que el espacio es $ T_2 $ y por lo tanto $ T_1 $.
@@ -188,9 +162,7 @@ Aquí debemos considerar cuatro casos diferentes dependiendo de si $ p $ es suce
 \item $ p $ no es sucesor ni predecesor: Entonces existen elementos $ c,d $ tales que $ a<c<p<d<b $ y luego si tomamos como $ V = (c,d) $ su clausura es a lo sumo $ [c,d] $ y esta esta contenida en $ (a,b) $.
 \end{enumerate}
 
-Ahora hagamos la prueba si el abierto $ U $ es de la forma $ (-\infty,b)  $. La prueba para el caso que $ U $ es de la forma $ (a,\infty) $ es análoga.
-
-Aqui tomamos cualquier $ p $ y consideramos dos casos. Si $ p $ es el mínimo elemento del orden o si no. En el último caso entonces existiria algún elemento $ a $ tal que $ a < p < b $ y por lo tanto volvemos al caso analizado anteriormente. 
+Ahora hagamos la prueba si el abierto $ U $ es de la forma $ (-\infty,b)  $. La prueba para el caso que $ U $ es de la forma $ (a,\infty) $ es análoga. Aqui tomamos cualquier $ p $ y consideramos dos casos. Si $ p $ es el mínimo elemento del orden o si no. En el último caso entonces existiria algún elemento $ a $ tal que $ a < p < b $ y por lo tanto volvemos al caso analizado anteriormente. 
 De lo contrario entonces debemos analizar si $ p $ es o no es predecesor de $ b $. En el primer caso entonces el abierto $ V = (-\infty,b) = \{p\} $ sería el indicado. En el segundo caso entonces existiría un elemento $ d $ tal que $ p<d<b $ y por lo tanto  $ V = (-\infty,d) $ sería el conjunto cuya clausura que es a los sumo $ (-\infty,d] $ esta contenida en $ (-\infty,b) $.
 
 Concluimos que la topología es regular.
